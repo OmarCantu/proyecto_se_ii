@@ -24,6 +24,30 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cc.se2.uanl.edu.contadordecalorias.MainActivity" />
         </activity>
+        <activity
+            android:name=".PerfilActivity"
+            android:label="@string/title_activity_perfil"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cc.se2.uanl.edu.contadordecalorias.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ConsultaActivity"
+            android:label="@string/title_activity_consulta"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cc.se2.uanl.edu.contadordecalorias.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ContadorActivity"
+            android:label="@string/title_activity_contador"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cc.se2.uanl.edu.contadordecalorias.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

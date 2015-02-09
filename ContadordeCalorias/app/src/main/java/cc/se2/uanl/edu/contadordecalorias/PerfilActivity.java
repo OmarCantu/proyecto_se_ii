@@ -1,7 +1,5 @@
 package cc.se2.uanl.edu.contadordecalorias;
 
-import android.app.Activity;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,7 +8,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 
-public class DisplayMessageActivity extends Activity {
+public class PerfilActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +20,10 @@ public class DisplayMessageActivity extends Activity {
 
         // Create the text view
         TextView textView = new TextView(this);
-        textView.setTextSize(40);
-        textView.setText(message);
 
         // Set the text view as the activity layout
         setContentView(textView);
+        //setContentView(R.layout.activity_perfil);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -36,7 +33,6 @@ public class DisplayMessageActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
         return super.onOptionsItemSelected(item);
     }
 }
