@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Contador de Calorías</string>
-    <string name="hello_world">¡Hola mundo!</string>
     <string name="edit_message">Escribe un mensaje</string>
     <string name="button_send">Enviar</string>
     <string name="action_settings">Ajustes</string>
