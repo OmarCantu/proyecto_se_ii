@@ -15,16 +15,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".DisplayMessageActivity"
-            android:label="@string/title_activity_display_message"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cc.se2.uanl.edu.contadordecalorias.MainActivity" />
-        </activity>
-        <activity
+        </activity>        <activity
             android:name=".PerfilActivity"
             android:label="@string/title_activity_perfil"
             android:parentActivityName=".MainActivity" >

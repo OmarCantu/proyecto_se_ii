@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Contador de Calorías</string>
-    <string name="edit_message">Escribe un mensaje</string>
-    <string name="button_send">Enviar</string>
-    <string name="action_settings">Ajustes</string>
-    <string name="title_activity_main">ActividadPrincipal</string>
-    <string name="title_activity_display_message">ActividadDesplegarMensaje</string>
-    <string name="action_search">Buscar</string>
     <string name="action_perfil">Perfil</string>
     <string name="action_consulta">Consulta</string>
     <string name="action_contador">Contador</string>
@@ -16,5 +9,26 @@
     <string name="title_activity_consulta">Consulta</string>
     <string name="title_activity_contador">Contador</string>
     <string name="menu">Menú</string>
-
+    <string name="bienvenida">¡Bienvenido!</string>
+    <string name="datos_personales">Datos personales</string>
+    <string name="perfil_estatura">Estatura</string>
+    <string name="perfil_cm">cm</string>
+    <string name="perfil_peso">Peso</string>
+    <string name="perfil_kg">kg</string>
+    <string name="perfil_edad">Edad</string>
+    <string name="perfil_años">años</string>
+    <string name="perfil_sexo">Sexo</string>
+    <string name="perfil_masculino">Hombre</string>
+    <string name="perfil_femenino">Mujer</string>
+    <string name="perfil_meta">¿Qué deseas conseguir?</string>
+    <string name="perder_peso">Perder peso</string>
+    <string name="mantener_peso">Mantener peso</string>
+    <string name="ganar_peso">Ganar peso</string>
+    <string name="actividad_fisica">Actividad física</string>
+    <string name="act_fisica_ninguna">Ninguna</string>
+    <string name="act_fisica_ligera">Ligera</string>
+    <string name="act_fisica_moderada">Moderada</string>
+    <string name="act_fisica_intensa">Intensa</string>
+    <string name="act_fisica_muy_intensa">Muy intensa</string>
+    <string name="perfil_guardar">Guardar</string>
 </resources>

@@ -9,20 +9,20 @@
     tools:context="cc.se2.uanl.edu.contadordecalorias.PerfilActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Datos Personales"
-        android:id="@+id/datos_personales"
-        android:textSize="30sp" android:textColor="#0071BC"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/datos_personales"
+    android:id="@+id/datos_personales"
+    android:textSize="25sp" android:textColor="@color/azul_real"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estatura:"
-        android:textSize="20sp"
-        android:id="@+id/perfil_Estatura"
+        android:text="@string/perfil_estatura"
+        android:textSize="18sp"
+        android:id="@+id/perfil_estatura"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/datos_personales"
@@ -31,9 +31,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Peso:"
-        android:textSize="20sp"
-        android:id="@+id/perfi_peso"
+        android:text="@string/perfil_peso"
+        android:textSize="18sp"
+        android:id="@+id/perfil_peso"
         android:layout_below="@+id/perfil_cm"
         android:layout_alignRight="@+id/perfil_edad"
         android:layout_alignEnd="@+id/perfil_edad" />
@@ -44,10 +44,10 @@
         android:inputType="numberDecimal"
         android:hint="cm"
         android:gravity="right"
-        android:ems="10"
+        android:ems="8"
         android:id="@+id/perfil_cm"
-        android:layout_toRightOf="@+id/perfil_Estatura"
-        android:layout_toEndOf="@+id/perfil_Estatura"
+        android:layout_toRightOf="@+id/perfil_estatura"
+        android:layout_toEndOf="@+id/perfil_estatura"
         android:layout_below="@+id/datos_personales" />
 
     <EditText
@@ -56,18 +56,18 @@
         android:inputType="numberDecimal"
         android:hint="kg"
         android:gravity="right"
-        android:ems="10"
+        android:ems="8"
         android:id="@+id/perfil_kg"
-        android:layout_toRightOf="@+id/perfi_peso"
+        android:layout_toRightOf="@+id/perfil_peso"
         android:layout_alignRight="@+id/perfil_cm"
         android:layout_alignEnd="@+id/perfil_cm"
-        android:layout_alignTop="@+id/perfi_peso" />
+        android:layout_alignTop="@+id/perfil_peso" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Sexo:"
+        android:textSize="18sp"
+        android:text="@string/perfil_sexo"
         android:id="@+id/perfil_sexo"
         android:layout_below="@+id/perfil_años"
         android:layout_alignParentLeft="true"
@@ -76,7 +76,7 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Masculino"
+        android:text="@string/perfil_masculino"
         android:id="@+id/perfil_masculino"
         android:checked="false"
         android:layout_below="@+id/perfil_años"
@@ -86,7 +86,7 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Femenino"
+        android:text="@string/perfil_femenino"
         android:id="@+id/perfil_femenino"
         android:checked="false"
         android:layout_alignTop="@+id/perfil_masculino"
@@ -96,8 +96,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edad:"
-        android:textSize="20sp"
+        android:text="@string/perfil_edad"
+        android:textSize="18sp"
         android:id="@+id/perfil_edad"
         android:layout_below="@+id/perfil_kg"
         android:layout_alignParentLeft="true"
@@ -107,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
-        android:ems="10"
+        android:ems="8"
         android:hint="años"
         android:gravity="right"
         android:id="@+id/perfil_años"
@@ -117,11 +117,11 @@
         android:layout_alignEnd="@+id/perfil_kg" />
 
     <TextView
-        android:text="¿Qué deseas conseguir?"
+        android:text="@string/perfil_meta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textColor="#0071BC"
+        android:textSize="25sp"
+        android:textColor="@color/azul_real"
         android:id="@+id/perfil_meta"
         android:layout_below="@+id/perfil_masculino"
         android:layout_alignParentLeft="true"
@@ -130,7 +130,7 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Perder Peso"
+        android:text="@string/perder_peso"
         android:id="@+id/perder_peso"
         android:layout_below="@+id/perfil_meta"
         android:layout_alignParentLeft="true"
@@ -140,8 +140,8 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mantener Peso"
-        android:id="@+id/mantener_Peso"
+        android:text="@string/mantener_peso"
+        android:id="@+id/mantener_peso"
         android:layout_below="@+id/perder_peso"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -150,9 +150,9 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ganar Peso"
+        android:text="@string/ganar_peso"
         android:id="@+id/ganar_peso"
-        android:layout_below="@+id/mantener_Peso"
+        android:layout_below="@+id/mantener_peso"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:checked="false" />
@@ -160,9 +160,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Actividad Física"
+        android:text="@string/actividad_fisica"
         android:id="@+id/actividad_fisica"
-        android:textSize="30sp" android:textColor="#0071BC"
+        android:textSize="25sp" android:textColor="@color/azul_real"
         android:layout_below="@+id/ganar_peso"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -170,7 +170,7 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Poca o ninguna"
+        android:text="@string/act_fisica_ninguna"
         android:id="@+id/act_fisica_ninguna"
         android:layout_below="@+id/actividad_fisica"
         android:layout_alignParentLeft="true"
@@ -180,7 +180,7 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ligera"
+        android:text="@string/act_fisica_ligera"
         android:id="@+id/act_fisica_ligera"
         android:checked="false"
         android:layout_above="@+id/act_fisica_muy_intensa"
@@ -189,7 +189,7 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Moderada"
+        android:text="@string/act_fisica_moderada"
         android:id="@+id/act_fisica_moderada"
         android:checked="false"
         android:layout_above="@+id/act_fisica_muy_intensa"
@@ -199,7 +199,7 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Intensa"
+        android:text="@string/act_fisica_intensa"
         android:id="@+id/act_fisica_intensa"
         android:layout_below="@+id/act_fisica_ninguna"
         android:layout_alignParentLeft="true"
@@ -209,7 +209,7 @@
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Muy intensa"
+        android:text="@string/act_fisica_muy_intensa"
         android:id="@+id/act_fisica_muy_intensa"
         android:checked="false"
         android:layout_alignTop="@+id/act_fisica_intensa"
@@ -219,20 +219,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar"
+        android:text="@string/perfil_guardar"
         android:id="@+id/perfil_guardar"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/act_fisica_intensa"
         android:layout_toEndOf="@+id/act_fisica_intensa" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancelar"
-        android:id="@+id/perfil_cancelar"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/perfil_años"
-        android:layout_alignEnd="@+id/perfil_años" />
-
 
 </RelativeLayout>
