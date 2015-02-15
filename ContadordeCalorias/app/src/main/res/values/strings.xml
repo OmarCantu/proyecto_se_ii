@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Contador de Calorías</string>
     <string name="action_perfil">Perfil</string>
     <string name="action_consulta">Consulta</string>
@@ -31,4 +32,6 @@
     <string name="act_fisica_intensa">Intensa</string>
     <string name="act_fisica_muy_intensa">Muy intensa</string>
     <string name="perfil_guardar">Guardar</string>
+    <string name="title_activity_test">TestActivity</string>
+
 </resources>

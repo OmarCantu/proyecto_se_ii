@@ -1,17 +1,16 @@
 package cc.se2.uanl.edu.contadordecalorias;
 
 import android.content.Intent;
-import android.app.ActionBar;
 import android.app.Activity;
+import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.Toast;
+import java.io.IOException;
+import java.io.InputStream;
 
 // public class MainActivity extends ActionBarActivity {
 public class MainActivity extends Activity {
@@ -83,5 +82,23 @@ public class MainActivity extends Activity {
     public void salir() {
         finish();
         System.exit(0);
+    }
+
+    public void readFile(View view) {
+        //InputStream in = (Activity)getContext().getAssets().open("my_file.txt");
+        try {
+
+            AssetManager assetManager = getAssets();
+            InputStream input = assetManager.open("testfile.txt");
+            int size = input.available();
+            byte[] buffer = new byte[size];
+            input.read(buffer);
+            input.close();
+            String text = new String(buffer);
+
+            Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
