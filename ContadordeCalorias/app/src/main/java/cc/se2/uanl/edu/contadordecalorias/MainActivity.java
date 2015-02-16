@@ -3,6 +3,8 @@ package cc.se2.uanl.edu.contadordecalorias;
 import android.content.Intent;
 import android.app.Activity;
 import android.content.res.AssetManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -75,7 +77,7 @@ public class MainActivity extends Activity {
 
     public void openContador(){
         Toast.makeText(this, "Contador", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, ContadorActivity.class);
+        Intent intent = new Intent(this, testActivity.class);
         startActivity(intent);
     }
 
@@ -100,5 +102,16 @@ public class MainActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        /*AssetDatabaseOpenHelper adb = new AssetDatabaseOpenHelper(this.getApplicationContext());
+        SQLiteDatabase db  =adb.openDatabase();
+
+        String      query  = "SELECT Alimento FROM Alimentos where Alimento = 'pizza' " ;
+
+        Cursor cursor  = db.rawQuery(query, null);
+        Toast.makeText(this, cursor.getString(0), Toast.LENGTH_SHORT).show();*/
+
+
     }
 }

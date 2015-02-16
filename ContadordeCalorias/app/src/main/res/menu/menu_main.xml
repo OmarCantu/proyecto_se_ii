@@ -15,8 +15,8 @@
         android:title="@string/action_contador"
         android:showAsAction="never" />
     <item android:id="@+id/action_salir"
-        android:title="@string/action_salir"
-        android:showAsAction="never" />
+    android:title="@string/action_salir"
+    android:showAsAction="never" />
 </menu>
 
 <!--<menu xmlns:android="http://schemas.android.com/apk/res/android"

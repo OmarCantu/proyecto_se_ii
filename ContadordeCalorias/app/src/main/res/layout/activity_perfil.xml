@@ -30,13 +30,14 @@
 
     <TextView
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
         android:text="@string/perfil_peso"
         android:textSize="18sp"
         android:id="@+id/perfil_peso"
-        android:layout_below="@+id/perfil_cm"
-        android:layout_alignRight="@+id/perfil_edad"
-        android:layout_alignEnd="@+id/perfil_edad" />
+        android:layout_alignTop="@+id/perfil_kg"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -58,10 +59,9 @@
         android:gravity="right"
         android:ems="8"
         android:id="@+id/perfil_kg"
-        android:layout_toRightOf="@+id/perfil_peso"
-        android:layout_alignRight="@+id/perfil_cm"
-        android:layout_alignEnd="@+id/perfil_cm"
-        android:layout_alignTop="@+id/perfil_peso" />
+        android:layout_below="@+id/perfil_cm"
+        android:layout_toRightOf="@+id/perfil_estatura"
+        android:layout_toEndOf="@+id/perfil_estatura" />
 
     <TextView
         android:layout_width="wrap_content"

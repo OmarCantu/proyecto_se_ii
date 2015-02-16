@@ -3,7 +3,7 @@
 
     <string name="app_name">Contador de Calorías</string>
     <string name="action_perfil">Perfil</string>
-    <string name="action_consulta">Consulta</string>
+    <string name="action_consulta">Consulta de Calorías</string>
     <string name="action_contador">Contador</string>
     <string name="action_salir">Salir</string>
     <string name="title_activity_perfil">Perfil</string>
@@ -33,5 +33,8 @@
     <string name="act_fisica_muy_intensa">Muy intensa</string>
     <string name="perfil_guardar">Guardar</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="que_alimento">¿Qué alimento?</string>
+    <string name="cantidad">¿Cantidad?</string>
+    <string name="calorias">Calorias:</string>
 
 </resources>
