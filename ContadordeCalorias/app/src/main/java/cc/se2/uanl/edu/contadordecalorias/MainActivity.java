@@ -82,8 +82,16 @@ public class MainActivity extends Activity {
     }
 
     public void salir() {
-        finish();
-        System.exit(0);
+        /*finish();
+        System.exit(0);*/
+
+        /*android.os.Process.killProcess(android.os.Process.myPid());*/
+
+        this.finish();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     public void readFile(View view) {

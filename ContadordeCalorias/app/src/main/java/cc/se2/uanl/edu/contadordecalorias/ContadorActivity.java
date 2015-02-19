@@ -24,7 +24,7 @@ public class ContadorActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_contador, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -32,16 +32,13 @@ public class ContadorActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.action_perfil:
+            case R.id.action_perfil_contador:
                 openPerfil();
                 return true;
-            case R.id.action_consulta:
+            case R.id.action_consulta_contador:
                 openConsulta();
                 return true;
-            case R.id.action_contador:
-                openContador();
-                return true;
-            case R.id.action_salir:
+            case R.id.action_salir_contador:
                 salir();
                 return true;
             default:
@@ -50,25 +47,29 @@ public class ContadorActivity extends Activity {
     }
 
     public void openPerfil(){
+        this.finish(); // Checar si esta linea es necesaria
         Toast.makeText(this, "Perfil", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, PerfilActivity.class);
         startActivity(intent);
     }
 
     public void openConsulta(){
+        this.finish(); // Checar si esta linea es necesaria
         Toast.makeText(this, "Consulta", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, ConsultaActivity.class);
         startActivity(intent);
     }
 
-    public void openContador(){
-        Toast.makeText(this, "Contador", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, ContadorActivity.class);
-        startActivity(intent);
-    }
-
     public void salir() {
-        finish();
-        System.exit(0);
+        /*finish();
+        System.exit(0);*/
+
+        /*android.os.Process.killProcess(android.os.Process.myPid());*/
+
+        this.finish();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

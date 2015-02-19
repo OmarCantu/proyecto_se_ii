@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/action_perfil_consulta"
+        android:title="@string/action_perfil"
+        android:showAsAction="never" />
+    <item android:id="@+id/action_contador_consulta"
+        android:title="@string/action_contador"
+        android:showAsAction="never" />
+    <item android:id="@+id/action_salir_consulta"
+        android:title="@string/action_salir"
+        android:showAsAction="never" />
+</menu>
