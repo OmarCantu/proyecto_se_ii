@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/footer"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/azul_real"
+        android:text="1500 cal."
+        android:id="@+id/calorias"
+        android:textSize="30dp"
+        android:layout_below="@+id/calcular"
+        android:layout_toLeftOf="@+id/calcular"
+        android:layout_toStartOf="@+id/calcular" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="calcular"
+        android:id="@+id/calcular"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(-200 cal.)"
+        android:id="@+id/diferencia"
+        android:textSize="30dp"
+        android:textColor="#ff49ff7a"
+        android:layout_below="@+id/calcular"
+        android:layout_toRightOf="@+id/calcular"
+        android:layout_toEndOf="@+id/calcular" />
+
+
+</RelativeLayout>

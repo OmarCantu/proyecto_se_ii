@@ -11,7 +11,7 @@ import android.widget.SimpleCursorAdapter;
 
 public class testActivity extends ListActivity {
 
-    private Cursor employees;
+    private Cursor food;
     private MyDatabase db;
 
     @Override
@@ -19,11 +19,11 @@ public class testActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         db = new MyDatabase(this);
-        employees = db.getAlimentos(); // you would not typically call this on the main thread
+        food = db.getAlimentos(); // you would not typically call this on the main thread
 
         ListAdapter adapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2,
-                employees,
+                food,
                 new String[] {"Alimento","Calorias"},
                 new int[] {android.R.id.text1,android.R.id.text2},0);
 
@@ -33,7 +33,7 @@ public class testActivity extends ListActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        employees.close();
+        food.close();
         db.close();
     }
 

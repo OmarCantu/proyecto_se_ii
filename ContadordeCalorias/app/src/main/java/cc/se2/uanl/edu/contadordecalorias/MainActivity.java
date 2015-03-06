@@ -77,21 +77,13 @@ public class MainActivity extends Activity {
 
     public void openContador(){
         Toast.makeText(this, "Contador", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, testActivity.class);
+        Intent intent = new Intent(this, ContadorActivity.class);
         startActivity(intent);
     }
 
     public void salir() {
-        /*finish();
-        System.exit(0);*/
-
-        /*android.os.Process.killProcess(android.os.Process.myPid());*/
-
-        this.finish();
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        finish();
+        System.exit(0);
     }
 
     public void readFile(View view) {
