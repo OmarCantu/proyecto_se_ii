@@ -18,7 +18,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="calcular"
+        android:text="@string/calcular"
         android:id="@+id/calcular"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />

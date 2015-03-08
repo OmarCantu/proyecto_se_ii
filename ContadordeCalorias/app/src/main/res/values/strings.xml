@@ -35,6 +35,10 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="que_alimento">¿Qué alimento?</string>
     <string name="cantidad">¿Cantidad?</string>
-    <string name="calorias">Calorias:</string>
-
+    <string name="calorias">Calorías:</string>
+    <string name="desayuno">Desayuno</string>
+    <string name="comida">Comida</string>
+    <string name="cena">Cena</string>
+    <string name="aperitivos">Aperitivos</string>
+    <string name="calcular">Calcular</string>
 </resources>

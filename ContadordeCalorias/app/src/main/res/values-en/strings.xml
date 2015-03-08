@@ -31,4 +31,13 @@
     <string name="act_fisica_intensa">Intense</string>
     <string name="act_fisica_muy_intensa">Very intense</string>
     <string name="perfil_guardar">Save</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="que_alimento">Which food?</string>
+    <string name="cantidad">Amount?</string>
+    <string name="calorias">Calories:</string>
+    <string name="desayuno">Breakfast</string>
+    <string name="comida">Lunch</string>
+    <string name="cena">Dinner</string>
+    <string name="aperitivos">Snacks</string>
+    <string name="calcular">Calculate</string>
 </resources>

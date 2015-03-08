@@ -39,9 +39,6 @@ public class MyDatabase extends SQLiteAssetHelper {
         qb.setTables(sqlTables);
         Cursor c = qb.query(db, sqlSelect, null, null,
                 null, null, null);
-
-
-
         c.moveToFirst();
         return c;
 

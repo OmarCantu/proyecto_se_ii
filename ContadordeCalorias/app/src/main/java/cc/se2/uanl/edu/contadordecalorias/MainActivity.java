@@ -64,26 +64,31 @@ public class MainActivity extends Activity {
     }
 
     public void openPerfil(){
-        Toast.makeText(this, "Perfil", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.title_activity_perfil, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, PerfilActivity.class);
         startActivity(intent);
     }
 
     public void openConsulta(){
-        Toast.makeText(this, "Consulta", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.title_activity_consulta, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, ConsultaActivity.class);
         startActivity(intent);
     }
 
     public void openContador(){
-        Toast.makeText(this, "Contador", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.title_activity_contador, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, ContadorActivity.class);
         startActivity(intent);
     }
 
     public void salir() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
         finish();
-        System.exit(0);
+//        finish();
+//        System.exit(0);
     }
 
     public void readFile(View view) {
@@ -103,7 +108,6 @@ public class MainActivity extends Activity {
             e.printStackTrace();
         }
 
-
         /*AssetDatabaseOpenHelper adb = new AssetDatabaseOpenHelper(this.getApplicationContext());
         SQLiteDatabase db  =adb.openDatabase();
 
@@ -111,7 +115,5 @@ public class MainActivity extends Activity {
 
         Cursor cursor  = db.rawQuery(query, null);
         Toast.makeText(this, cursor.getString(0), Toast.LENGTH_SHORT).show();*/
-
-
     }
 }
