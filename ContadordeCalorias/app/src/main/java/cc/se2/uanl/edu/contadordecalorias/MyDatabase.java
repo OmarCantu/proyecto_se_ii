@@ -44,4 +44,30 @@ public class MyDatabase extends SQLiteAssetHelper {
 
     }
 
+
+    public int getCalorias(String alimento)
+    {
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        int cal;
+
+
+        String [] sqlSelect = {"0 _id", "Alimento", "Calorias"};
+        String sqlTables = "Alimentos";
+        qb.setTables(sqlTables);
+        alimento=alimento.toUpperCase();
+        qb.appendWhere("UPPER(Alimento)="+"'"+alimento+"'");
+
+        Cursor c = qb.query(db, sqlSelect, null, null, null, null, null);
+        c.moveToFirst();
+
+        if(c.moveToFirst())
+            cal = c.getInt(2);
+        else
+            cal=-1;
+
+        return cal;
+    }
+
+
 }

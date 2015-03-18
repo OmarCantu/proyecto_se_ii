@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,16 +24,17 @@ public class ContadorActivity extends Activity {
     SparseArray<Group> groups = new SparseArray<Group>();
     RelativeLayout footerLayout;
 
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contador);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_contador);
         createData();
+
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,groups);
+
         View view = getLayoutInflater().inflate(R.layout.footer, listView, false);
         footerLayout = (RelativeLayout) view.findViewById(R.id.footer);
         listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
@@ -42,8 +44,8 @@ public class ContadorActivity extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_contador, menu);
         return super.onCreateOptionsMenu(menu);

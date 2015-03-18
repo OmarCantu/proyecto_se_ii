@@ -19,7 +19,7 @@ public class testActivity extends ListActivity {
         super.onCreate(savedInstanceState);
 
         db = new MyDatabase(this);
-        food = db.getAlimentos(); // you would not typically call this on the main thread
+        food = db.getAlimentos();
 
         ListAdapter adapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2,

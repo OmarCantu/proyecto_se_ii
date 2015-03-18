@@ -28,7 +28,20 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <!--
     <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cuanto"
+        android:drawableRight="@drawable/ic_search"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+        -->
+
+    <AutoCompleteTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cuanto"
@@ -78,5 +91,30 @@
         android:layout_alignRight="@+id/textView2"
         android:layout_alignEnd="@+id/textView2"
         android:layout_marginTop="17dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Consulta_Calorias"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/imageButton"
+        android:gravity="center_horizontal"
+        android:layout_alignTop="@+id/calorias"
+        android:layout_alignBottom="@+id/calorias"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calorias"
+        android:textSize="20sp"
+        android:id="@+id/calorias"
+        android:layout_below="@+id/numberPicker"
+        android:layout_toRightOf="@+id/imageButton"
+        android:layout_toEndOf="@+id/imageButton"
+        android:layout_marginTop="40dp" />
 
 </RelativeLayout>

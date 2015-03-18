@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,22 +39,30 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent)
     {
-        //final String children = (String) getChild(groupPosition, childPosition);
-        TextView text = null;
-        if (convertView == null) {
+
+        EditText alimento = null;
+
+        if (convertView == null)
+        {
             convertView = inflater.inflate(R.layout.listrow_details, null);
         }
 
-        EditText alimento  = (EditText)convertView.findViewById(R.id.alimento);
-        alimento.setText("");
-        //text = (TextView) convertView.findViewById(R.id.textView1);
-        //text.setText(children);
-       /*convertView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });*/
+        NumberPicker np = (NumberPicker) convertView.findViewById(R.id.numberPicker1);
+        np.setMaxValue(1000);
+        np.setMinValue(0);
+        np.setDescendantFocusability(NumberPicker.FOCUS_BEFORE_DESCENDANTS);
+
+
+
+        alimento  = (EditText)convertView.findViewById(R.id.alimento);
+        alimento.setText("");
+        alimento.clearFocus();
+
+
+
+
+
         return convertView;
     }
 
@@ -97,7 +106,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         ((TextView) convertView).setText(group.string);
 
 
-
         return convertView;
     }
 
@@ -108,6 +116,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
+        return true;
     }
 }
