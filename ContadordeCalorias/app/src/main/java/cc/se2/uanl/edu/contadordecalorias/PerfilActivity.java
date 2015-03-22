@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,46 +20,72 @@ import android.widget.Toast;
 public class PerfilActivity extends Activity {
 
     public static final String PREFS_NAME = "MyPrefsFile";
-    private String peso;
-    private Button botonGuardar;
+    private int estatura;
+    private int peso;
+    private int edad;
+    private int sexo;
+    private int meta;
+    private int actividad;
+    private EditText inputEstatura;
     private EditText inputPeso;
+    private EditText inputEdad;
+    private RadioGroup radioSexo;
+    private RadioGroup radioMeta;
+    private RadioGroup radioActividad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Restore the saved data
-        botonGuardar = (Button)findViewById(R.id.perfil_guardar);
+        Button botonGuardar = (Button)findViewById(R.id.perfil_guardar);
 
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
-        peso = preferences.getString("peso", "default value");
+
+        estatura = preferences.getInt("estatura", 0);
+        peso = preferences.getInt("peso", 0);
+        edad = preferences.getInt("edad", 0);
+        sexo = preferences.getInt("sexo", 0);
+        meta = preferences.getInt("meta", 0);
+        actividad = preferences.getInt("actividad", 0);
+
+        inputEstatura = (EditText) findViewById(R.id.perfil_cm);
         inputPeso = (EditText) findViewById(R.id.perfil_kg);
-        inputPeso.setText(peso);
+        inputEdad = (EditText) findViewById(R.id.perfil_años);
+        radioSexo = (RadioGroup) findViewById(R.id.radio_sexo);
+        radioMeta = (RadioGroup) findViewById(R.id.radio_meta);
+        radioActividad = (RadioGroup) findViewById(R.id.radio_actividad);
+
+        inputEstatura.setText("" + estatura);
+        inputPeso.setText("" + peso);
+        inputEdad.setText("" + edad);
+        radioSexo.check(sexo);
+        radioMeta.check(meta);
+        radioActividad.check(actividad);
 
         botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                inputEstatura = (EditText) findViewById(R.id.perfil_cm);
                 inputPeso = (EditText) findViewById(R.id.perfil_kg);
-                peso = inputPeso.getText().toString();
-                Toast.makeText(PerfilActivity.this, peso, Toast.LENGTH_SHORT).show();
+                inputEdad = (EditText) findViewById(R.id.perfil_años);
+                radioSexo = (RadioGroup) findViewById(R.id.radio_sexo);
+                radioMeta = (RadioGroup) findViewById(R.id.radio_meta);
+                radioActividad = (RadioGroup) findViewById(R.id.radio_actividad);
+
+                estatura = Integer.parseInt(inputEstatura.getText().toString());
+                peso = Integer.parseInt(inputPeso.getText().toString());
+                edad = Integer.parseInt(inputEdad.getText().toString());
+                sexo = radioSexo.getCheckedRadioButtonId();
+                meta = radioMeta.getCheckedRadioButtonId();
+                actividad = radioActividad.getCheckedRadioButtonId();
+
+                //Toast.makeText(PerfilActivity.this, peso, Toast.LENGTH_SHORT).show();
             }
         });
-
-        /*// Get the message from the intent
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
-        // Create the text view
-        TextView textView = new TextView(this);
-        textView.setTextSize(40);
-        textView.setText(message);
-
-        // Set the text view as the activity layout
-        setContentView(textView);
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);*/
     }
 
     @Override
@@ -66,7 +94,12 @@ public class PerfilActivity extends Activity {
 
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("peso", peso);
+        editor.putInt("estatura", estatura);
+        editor.putInt("peso", peso);
+        editor.putInt("edad", edad);
+        editor.putInt("sexo", sexo);
+        editor.putInt("meta", meta);
+        editor.putInt("actividad", actividad);
 
         editor.commit();
     }

@@ -20,7 +20,7 @@
     <string name="perfil_sexo">Sex</string>
     <string name="perfil_masculino">Man</string>
     <string name="perfil_femenino">Woman</string>
-    <string name="perfil_meta">What do you want to accomplish?</string>
+    <string name="perfil_meta">Goal</string>
     <string name="perder_peso">Lose weight</string>
     <string name="mantener_peso">Keep weight</string>
     <string name="ganar_peso">Gain weight</string>
