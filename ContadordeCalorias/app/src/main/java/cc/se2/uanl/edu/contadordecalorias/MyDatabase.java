@@ -14,7 +14,7 @@ package cc.se2.uanl.edu.contadordecalorias;
 
 public class MyDatabase extends SQLiteAssetHelper {
 
-    private static final String DATABASE_NAME = "Alimentos.db";
+    private static final String DATABASE_NAME = "AlimentosDB.db";
     private static final int DATABASE_VERSION = 3;
 
     public MyDatabase(Context context) {
@@ -51,12 +51,11 @@ public class MyDatabase extends SQLiteAssetHelper {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         int cal;
 
-
         String [] sqlSelect = {"0 _id", "Alimento", "Calorias"};
         String sqlTables = "Alimentos";
+        alimento = alimento.substring(0, 1).toUpperCase() + alimento.substring(1);
         qb.setTables(sqlTables);
-        alimento=alimento.toUpperCase();
-        qb.appendWhere("UPPER(Alimento)="+"'"+alimento+"'");
+        qb.appendWhere("Alimento="+"'"+alimento+"'");
 
         Cursor c = qb.query(db, sqlSelect, null, null, null, null, null);
         c.moveToFirst();
