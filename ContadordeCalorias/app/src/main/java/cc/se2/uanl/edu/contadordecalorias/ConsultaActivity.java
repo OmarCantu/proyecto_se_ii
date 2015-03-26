@@ -25,7 +25,6 @@ public class ConsultaActivity extends Activity {
     ImageButton imageButton;
     private Cursor food;
     private MyDatabase db;
-    String [] pv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +32,12 @@ public class ConsultaActivity extends Activity {
         setContentView(R.layout.activity_consulta);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         NumberPicker np = (NumberPicker) findViewById(R.id.numberPicker);
-        pickerValues();
+        np.setMaxValue(1000);
         np.setMinValue(0);
-        np.setMaxValue(pv.length-1);
-        np.setDisplayedValues(pv);
+        np.setValue(100);
 
         db = new MyDatabase(this);
         food = db.getAlimentos();
-
         crearLista();
         addListenerOnButton();
 
@@ -105,7 +102,7 @@ public class ConsultaActivity extends Activity {
                 String buscar = ed.getText().toString();
 
                 NumberPicker np = (NumberPicker) findViewById(R.id.numberPicker);
-                int cantidad = Integer.parseInt(pv[np.getValue()]);
+                int cantidad = np.getValue();
 
                 TextView tv = (TextView) findViewById(R.id.Consulta_Calorias);
                 tv.setText(calcularCalorias(buscar,cantidad));
@@ -147,19 +144,6 @@ public class ConsultaActivity extends Activity {
         return totalCalorias;
     }
 
-    public void pickerValues()
-    {
-        int minValue = 50;
-        int maxValue = 1000;
-        int step = 50;
-
-        pv = new String[maxValue/minValue];
-
-        for (int i = minValue; i <= maxValue; i += step) {
-            pv[(i/step)-1] = String.valueOf(i);
-        }
-
-    }
 
 
 }
