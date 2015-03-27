@@ -2,6 +2,8 @@
 <resources>
     <color name="azul_real">#0071BC</color>
     <color name="blanco">#FFFFFF</color>
+    <color name="negro">#000000</color>
+    <color name="gris_oscuro">#436060</color>
     <color name="gris_suave">#EAEAEA</color>
     <color name="celeste_opaco">#9BC7E5</color>
 </resources>

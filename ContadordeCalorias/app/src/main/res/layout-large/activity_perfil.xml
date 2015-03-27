@@ -1,0 +1,297 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="cc.se2.uanl.edu.contadordecalorias.PerfilActivity">
+
+    <!--TÍTULO DATOS PERSONALES-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/datos_personales"
+        android:id="@+id/datos_personales"
+        android:textSize="30sp"
+        android:textColor="@color/azul_real"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/perfil_edad"
+        android:layout_alignStart="@+id/perfil_edad" />
+
+    <!--LEYENDA ESTATURA-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/perfil_estatura"
+        android:textSize="21sp"
+        android:id="@+id/perfil_estatura"
+        android:layout_above="@+id/perfil_kg"
+        android:layout_alignLeft="@+id/datos_personales"
+        android:layout_alignStart="@+id/datos_personales" />
+
+    <!--INPUT ESTATURA-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="cm"
+        android:gravity="right"
+        android:ems="12"
+        android:textSize="21sp"
+        android:id="@+id/perfil_cm"
+        android:layout_below="@+id/datos_personales"
+        android:layout_toRightOf="@+id/radio_sexo"
+        android:layout_toEndOf="@+id/radio_sexo" />
+
+    <!--LEYENDA PESO-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/perfil_peso"
+        android:textSize="21sp"
+        android:id="@+id/perfil_peso"
+        android:layout_alignBottom="@+id/perfil_kg"
+        android:layout_alignLeft="@+id/perfil_estatura"
+        android:layout_alignStart="@+id/perfil_estatura" />
+
+    <!--INPUT PESO-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="kg"
+        android:gravity="right"
+        android:ems="12"
+        android:textSize="21sp"
+        android:id="@+id/perfil_kg"
+        android:layout_below="@+id/perfil_cm"
+        android:layout_alignLeft="@+id/perfil_cm"
+        android:layout_alignStart="@+id/perfil_cm" />
+
+    <!--LEYENDA EDAD-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/perfil_edad"
+        android:textSize="21sp"
+        android:id="@+id/perfil_edad"
+        android:layout_alignBottom="@+id/perfil_años"
+        android:layout_alignLeft="@+id/radio_sexo"
+        android:layout_alignStart="@+id/radio_sexo" />
+
+    <!--INPUT EDAD-->
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="12"
+        android:textSize="21sp"
+        android:hint="años"
+        android:gravity="right"
+        android:id="@+id/perfil_años"
+        android:layout_below="@+id/perfil_kg"
+        android:layout_alignLeft="@+id/perfil_kg"
+        android:layout_alignStart="@+id/perfil_kg" />
+
+    <!--LEYENDA SEXO-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:text="@string/perfil_sexo"
+        android:id="@+id/perfil_sexo"
+        android:layout_above="@+id/radio_sexo"
+        android:layout_alignLeft="@+id/radio_sexo"
+        android:layout_alignStart="@+id/radio_sexo" />
+
+    <!--INPUT SEXO-->
+    <RadioGroup
+        android:id="@+id/radio_sexo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/perfil_meta"
+        android:layout_alignLeft="@+id/perfil_meta"
+        android:layout_alignStart="@+id/perfil_meta">
+
+        <!--RADIO BUTTON MASCULINO-->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/perfil_masculino"
+            android:id="@+id/perfil_masculino"
+            android:checked="false"
+            android:layout_below="@+id/perfil_años"
+            android:layout_toRightOf="@+id/perfil_femenino"
+            android:layout_toEndOf="@+id/perfil_femenino"
+            android:textSize="21sp" />
+
+        <!--RADIO BUTTON FEMENINO-->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/perfil_femenino"
+            android:id="@+id/perfil_femenino"
+            android:checked="false"
+            android:textSize="21sp"
+            android:layout_alignTop="@+id/radio_sexo"
+            android:layout_alignLeft="@+id/ganar_peso"
+            android:layout_alignStart="@+id/ganar_peso" />
+
+    </RadioGroup>
+
+    <!--TÍTULO META-->
+    <TextView
+        android:text="@string/perfil_meta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@color/azul_real"
+        android:id="@+id/perfil_meta"
+        android:layout_above="@+id/radio_meta"
+        android:layout_alignLeft="@+id/actividad_fisica"
+        android:layout_alignStart="@+id/actividad_fisica"/>
+
+    <!--INPUT META-->
+    <RadioGroup
+        android:id="@+id/radio_meta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_above="@+id/actividad_fisica"
+        android:layout_alignLeft="@+id/perfil_meta"
+        android:layout_alignStart="@+id/perfil_meta">
+
+        <!--RADIO BUTTON PERDER-->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/perder_peso"
+            android:id="@+id/perder_peso"
+            android:layout_below="@+id/perfil_meta"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:checked="false"
+            android:textSize="21sp" />
+
+        <!--RADIO BUTTON MANTENER-->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mantener_peso"
+            android:id="@+id/mantener_peso"
+            android:checked="false"
+            android:textSize="21sp"
+            android:layout_alignTop="@+id/radio_meta"
+            android:layout_alignRight="@+id/perfil_años"
+            android:layout_alignEnd="@+id/perfil_años" />
+
+        <!--RADIO BUTTONS GANAR-->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ganar_peso"
+            android:id="@+id/ganar_peso"
+            android:checked="false"
+            android:textSize="21sp"
+            android:layout_alignTop="@+id/radio_meta"
+            android:layout_alignLeft="@+id/act_fisica_intensa"
+            android:layout_alignStart="@+id/act_fisica_intensa" />
+
+    </RadioGroup>
+
+    <!--TÍTULO ACTIVIDAD FÍSICA-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/actividad_fisica"
+        android:id="@+id/actividad_fisica"
+        android:textSize="30sp"
+        android:textColor="@color/azul_real"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/radio_actividad"
+        android:layout_alignStart="@+id/radio_actividad" />
+
+    <!--INPUT ACTIVIDAD FÍSICA-->
+    <RadioGroup
+        android:id="@+id/radio_actividad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actividad_fisica"
+        android:layout_toLeftOf="@+id/perfil_guardar"
+        android:layout_toStartOf="@+id/perfil_guardar">
+
+        <!--RADIO BUTTON NINGUNA-->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/act_fisica_ninguna"
+            android:id="@+id/act_fisica_ninguna"
+            android:layout_below="@+id/actividad_fisica"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:checked="false"
+            android:textSize="21sp" />
+
+        <!--RADIO BUTTON LIGERA-->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/act_fisica_ligera"
+            android:id="@+id/act_fisica_ligera"
+            android:checked="false"
+            android:layout_above="@+id/act_fisica_muy_intensa"
+            android:layout_centerHorizontal="true"
+            android:textSize="21sp" />
+
+        <!--RADIO BUTTON MODERADA-->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/act_fisica_moderada"
+            android:id="@+id/act_fisica_moderada"
+            android:checked="false"
+            android:layout_above="@+id/act_fisica_muy_intensa"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="21sp" />
+
+        <!--RADIO BUTTON INTENSA-->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/act_fisica_intensa"
+            android:id="@+id/act_fisica_intensa"
+            android:checked="false"
+            android:textSize="21sp"
+            android:layout_alignTop="@+id/radio_actividad"
+            android:layout_alignLeft="@+id/act_fisica_muy_intensa"
+            android:layout_alignStart="@+id/act_fisica_muy_intensa" />
+
+        <!--RADIO BUTTON MUY INTENSA-->
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/act_fisica_muy_intensa"
+            android:id="@+id/act_fisica_muy_intensa"
+            android:checked="false"
+            android:textSize="21sp"
+            android:layout_below="@+id/act_fisica_intensa"
+            android:layout_toRightOf="@+id/datos_personales"
+            android:layout_toEndOf="@+id/datos_personales" />
+
+    </RadioGroup>
+
+    <!--BOTÓN GUARDAR-->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/perfil_guardar"
+        android:id="@+id/perfil_guardar"
+        android:layout_below="@+id/radio_actividad"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="73dp" />
+
+</RelativeLayout>
