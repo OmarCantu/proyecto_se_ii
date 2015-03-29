@@ -26,32 +26,50 @@ public class PerfilActivity extends Activity {
     private int sexo;
     private int meta;
     private int actividad;
+    private int caloriasMeta;
     private EditText inputEstatura;
     private EditText inputPeso;
     private EditText inputEdad;
     private RadioGroup radioSexo;
     private RadioGroup radioMeta;
     private RadioGroup radioActividad;
+    private Button botonGuardar;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Restore the saved data
-        Button botonGuardar = (Button)findViewById(R.id.perfil_guardar);
+        botonGuardar = (Button)findViewById(R.id.perfil_guardar);
 
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
+        desplegarDatosGuardados();
 
+        botonGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actualizarVariables();
+                calcularCaloriasMeta();
+                Toast.makeText(PerfilActivity.this, "Tu meta: " + caloriasMeta + " cal/día",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void desplegarDatosGuardados(){
+        preferences = getSharedPreferences(PREFS_NAME, 0);
+
+        // Obtener datos guardados
         estatura = preferences.getString("estatura", "");
         peso = preferences.getString("peso", "");
         edad = preferences.getInt("edad", 0);
         sexo = preferences.getInt("sexo", 0);
         meta = preferences.getInt("meta", 0);
         actividad = preferences.getInt("actividad", 0);
+        caloriasMeta = preferences.getInt("caloriasMeta", 0);
 
+        // Instanciar inputs
         inputEstatura = (EditText) findViewById(R.id.perfil_cm);
         inputPeso = (EditText) findViewById(R.id.perfil_kg);
         inputEdad = (EditText) findViewById(R.id.perfil_años);
@@ -59,40 +77,84 @@ public class PerfilActivity extends Activity {
         radioMeta = (RadioGroup) findViewById(R.id.radio_meta);
         radioActividad = (RadioGroup) findViewById(R.id.radio_actividad);
 
+        // Mostrar datos
         inputEstatura.setText(estatura);
         inputPeso.setText(peso);
         inputEdad.setText(""+edad);
         radioSexo.check(sexo);
         radioMeta.check(meta);
         radioActividad.check(actividad);
+    }
 
-        botonGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                inputEstatura = (EditText) findViewById(R.id.perfil_cm);
-                inputPeso = (EditText) findViewById(R.id.perfil_kg);
-                inputEdad = (EditText) findViewById(R.id.perfil_años);
-                radioSexo = (RadioGroup) findViewById(R.id.radio_sexo);
-                radioMeta = (RadioGroup) findViewById(R.id.radio_meta);
-                radioActividad = (RadioGroup) findViewById(R.id.radio_actividad);
+    public void actualizarVariables() {
+        // Instanciar inputs
+        inputEstatura = (EditText) findViewById(R.id.perfil_cm);
+        inputPeso = (EditText) findViewById(R.id.perfil_kg);
+        inputEdad = (EditText) findViewById(R.id.perfil_años);
+        radioSexo = (RadioGroup) findViewById(R.id.radio_sexo);
+        radioMeta = (RadioGroup) findViewById(R.id.radio_meta);
+        radioActividad = (RadioGroup) findViewById(R.id.radio_actividad);
 
-                estatura = inputEstatura.getText().toString();
-                peso = inputPeso.getText().toString();
-                edad = Integer.parseInt(inputEdad.getText().toString());
-                sexo = radioSexo.getCheckedRadioButtonId();
-                meta = radioMeta.getCheckedRadioButtonId();
-                actividad = radioActividad.getCheckedRadioButtonId();
+        // Asignar datos datos de inputs a variables
+        estatura = inputEstatura.getText().toString();
+        peso = inputPeso.getText().toString();
+        edad = Integer.parseInt(inputEdad.getText().toString());
+        sexo = radioSexo.getCheckedRadioButtonId();
+        meta = radioMeta.getCheckedRadioButtonId();
+        actividad = radioActividad.getCheckedRadioButtonId();
+    }
 
-                //Toast.makeText(PerfilActivity.this, peso, Toast.LENGTH_SHORT).show();
-            }
-        });
+    public void calcularCaloriasMeta() {
+        double tasaMetabolicaBasal;
+        double caloriasDiarias = 0.0d;
+
+        if (sexo == R.id.perfil_masculino) {
+            tasaMetabolicaBasal = (10 * Double.parseDouble(peso)) +
+                    (6.25 * Double.parseDouble(estatura)) - (5 * edad) + 5;
+        } else {
+            tasaMetabolicaBasal = (10 * Double.parseDouble(peso)) +
+                    (6.25 * Double.parseDouble(estatura)) - (5 * edad) - 161;
+        }
+
+        switch(actividad) {
+            case R.id.act_fisica_ninguna:
+                caloriasDiarias = tasaMetabolicaBasal * 1.2;
+                break;
+            case R.id.act_fisica_ligera:
+                caloriasDiarias = tasaMetabolicaBasal * 1.375;
+                break;
+            case R.id.act_fisica_moderada:
+                caloriasDiarias = tasaMetabolicaBasal * 1.55;
+                break;
+            case R.id.act_fisica_intensa:
+                caloriasDiarias = tasaMetabolicaBasal * 1.725;
+                break;
+            case R.id.act_fisica_muy_intensa:
+                caloriasDiarias = tasaMetabolicaBasal * 1.9;
+                break;
+        }
+
+        switch (meta) {
+            case R.id.perder_peso:
+                caloriasMeta = (int) Math.round(caloriasDiarias * 0.75);
+                break;
+            case R.id.mantener_peso:
+                caloriasMeta = (int) Math.round(caloriasDiarias);
+                break;
+            case R.id.ganar_peso:
+                caloriasMeta = (int) Math.round(caloriasDiarias * 1.25);
+                break;
+        }
     }
 
     @Override
     protected void onStop(){
         super.onStop();
+        persistirDatos();
+    }
 
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
+    public void persistirDatos() {
+        preferences = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("estatura", estatura);
         editor.putString("peso", peso);
@@ -100,7 +162,7 @@ public class PerfilActivity extends Activity {
         editor.putInt("sexo", sexo);
         editor.putInt("meta", meta);
         editor.putInt("actividad", actividad);
-
+        editor.putInt("caloriasMeta", Integer.parseInt("" + Math.round(caloriasMeta)));
         editor.commit();
     }
 
