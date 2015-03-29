@@ -18,6 +18,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     private final SparseArray<Group> groups;
     public LayoutInflater inflater;
     public Activity activity;
+    private String [] pv;
 
     public MyExpandableListAdapter(Activity act, SparseArray<Group> groups) {
         activity = act;
@@ -49,8 +50,10 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
 
         NumberPicker np = (NumberPicker) convertView.findViewById(R.id.numberPicker1);
-        np.setMaxValue(1000);
+        pickerValues();
         np.setMinValue(0);
+        np.setMaxValue(pv.length-1);
+        np.setDisplayedValues(pv);
         np.setDescendantFocusability(NumberPicker.FOCUS_BEFORE_DESCENDANTS);
 
 
@@ -118,4 +121,20 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
+    public void pickerValues()
+    {
+        int minValue = 50;
+        int maxValue = 1000;
+        int step = 50;
+
+        pv = new String[maxValue/minValue];
+
+        for (int i = minValue; i <= maxValue; i += step) {
+            pv[(i/step)-1] = String.valueOf(i);
+        }
+
+    }
+
+
 }

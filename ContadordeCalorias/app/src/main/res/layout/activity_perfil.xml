@@ -10,15 +10,15 @@
 
     <!--TÍTULO DATOS PERSONALES-->
     <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/datos_personales"
-    android:id="@+id/datos_personales"
-    android:textSize="20sp"
-    android:textColor="@color/azul_real"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:layout_marginBottom="15dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/datos_personales"
+        android:id="@+id/datos_personales"
+        android:textSize="20sp"
+        android:textColor="@color/azul_real"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="15dp"/>
 
     <!--LEYENDA ESTATURA-->
     <TextView
@@ -44,8 +44,8 @@
         android:id="@+id/perfil_cm"
         android:layout_toRightOf="@+id/perfil_estatura"
         android:layout_below="@+id/datos_personales"
-        android:layout_alignRight="@+id/actividad_fisica"
-        android:layout_alignEnd="@+id/actividad_fisica" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <!--LEYENDA PESO-->
     <TextView
@@ -95,9 +95,10 @@
         android:gravity="right"
         android:id="@+id/perfil_años"
         android:layout_alignTop="@+id/perfil_edad"
-        android:layout_toRightOf="@+id/perfil_edad"
         android:layout_alignRight="@+id/perfil_kg"
-        android:layout_alignEnd="@+id/perfil_kg" />
+        android:layout_alignEnd="@+id/perfil_kg"
+        android:layout_toRightOf="@+id/perfil_estatura"
+        android:layout_toEndOf="@+id/perfil_estatura" />
 
     <!--LEYENDA SEXO-->
     <TextView

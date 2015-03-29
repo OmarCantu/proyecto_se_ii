@@ -20,8 +20,8 @@ import android.widget.Toast;
 public class PerfilActivity extends Activity {
 
     public static final String PREFS_NAME = "MyPrefsFile";
-    private int estatura;
-    private int peso;
+    private String estatura;
+    private String peso;
     private int edad;
     private int sexo;
     private int meta;
@@ -45,8 +45,8 @@ public class PerfilActivity extends Activity {
 
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
 
-        estatura = preferences.getInt("estatura", 0);
-        peso = preferences.getInt("peso", 0);
+        estatura = preferences.getString("estatura", "");
+        peso = preferences.getString("peso", "");
         edad = preferences.getInt("edad", 0);
         sexo = preferences.getInt("sexo", 0);
         meta = preferences.getInt("meta", 0);
@@ -59,9 +59,9 @@ public class PerfilActivity extends Activity {
         radioMeta = (RadioGroup) findViewById(R.id.radio_meta);
         radioActividad = (RadioGroup) findViewById(R.id.radio_actividad);
 
-        inputEstatura.setText("" + estatura);
-        inputPeso.setText("" + peso);
-        inputEdad.setText("" + edad);
+        inputEstatura.setText(estatura);
+        inputPeso.setText(peso);
+        inputEdad.setText(""+edad);
         radioSexo.check(sexo);
         radioMeta.check(meta);
         radioActividad.check(actividad);
@@ -76,8 +76,8 @@ public class PerfilActivity extends Activity {
                 radioMeta = (RadioGroup) findViewById(R.id.radio_meta);
                 radioActividad = (RadioGroup) findViewById(R.id.radio_actividad);
 
-                estatura = Integer.parseInt(inputEstatura.getText().toString());
-                peso = Integer.parseInt(inputPeso.getText().toString());
+                estatura = inputEstatura.getText().toString();
+                peso = inputPeso.getText().toString();
                 edad = Integer.parseInt(inputEdad.getText().toString());
                 sexo = radioSexo.getCheckedRadioButtonId();
                 meta = radioMeta.getCheckedRadioButtonId();
@@ -94,8 +94,8 @@ public class PerfilActivity extends Activity {
 
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("estatura", estatura);
-        editor.putInt("peso", peso);
+        editor.putString("estatura", estatura);
+        editor.putString("peso", peso);
         editor.putInt("edad", edad);
         editor.putInt("sexo", sexo);
         editor.putInt("meta", meta);
