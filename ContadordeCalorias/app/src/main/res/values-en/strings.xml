@@ -42,4 +42,8 @@
     <string name="calcular">Calculate</string>
     <string name="titulo_calorias_meta">Calorie target</string>
     <string name="mensaje_calorias_meta">Your daily target: </string>
+    <string name="titulo_error_input_perfil">Input error</string>
+    <string name="mensaje_error_input_perfil">
+        One or more fields are empty or have invalid data.
+    </string>
 </resources>

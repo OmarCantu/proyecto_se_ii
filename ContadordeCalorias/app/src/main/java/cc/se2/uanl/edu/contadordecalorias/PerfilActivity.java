@@ -25,7 +25,7 @@ public class PerfilActivity extends Activity {
     public static final String PREFS_NAME = "MyPrefsFile";
     private String estatura;
     private String peso;
-    private int edad;
+    private String edad;
     private int sexo;
     private int meta;
     private int actividad;
@@ -53,10 +53,14 @@ public class PerfilActivity extends Activity {
             @Override
             public void onClick(View view) {
                 actualizarVariables();
-                calcularCaloriasMeta();
-                desplegarCaloriasMeta(PerfilActivity.this);
-                /*Toast.makeText(PerfilActivity.this, "Tu meta: " + caloriasMeta + " cal/día",
+                if (validarInputs()) {
+                    calcularCaloriasMeta();
+                    desplegarCaloriasMeta(PerfilActivity.this);
+                    /*Toast.makeText(PerfilActivity.this, "Tu meta: " + caloriasMeta + " cal/día",
                         Toast.LENGTH_LONG).show();*/
+                } else {
+                    desplegarAdvertencia(PerfilActivity.this);
+                }
             }
         });
     }
@@ -67,7 +71,7 @@ public class PerfilActivity extends Activity {
         // Obtener datos guardados
         estatura = preferences.getString("estatura", "");
         peso = preferences.getString("peso", "");
-        edad = preferences.getInt("edad", 0);
+        edad = preferences.getString("edad", "");
         sexo = preferences.getInt("sexo", 0);
         meta = preferences.getInt("meta", 0);
         actividad = preferences.getInt("actividad", 0);
@@ -84,7 +88,7 @@ public class PerfilActivity extends Activity {
         // Mostrar datos
         inputEstatura.setText(estatura);
         inputPeso.setText(peso);
-        inputEdad.setText(""+edad);
+        inputEdad.setText(edad);
         radioSexo.check(sexo);
         radioMeta.check(meta);
         radioActividad.check(actividad);
@@ -102,7 +106,7 @@ public class PerfilActivity extends Activity {
         // Asignar datos datos de inputs a variables
         estatura = inputEstatura.getText().toString();
         peso = inputPeso.getText().toString();
-        edad = Integer.parseInt(inputEdad.getText().toString());
+        edad = inputEdad.getText().toString();
         sexo = radioSexo.getCheckedRadioButtonId();
         meta = radioMeta.getCheckedRadioButtonId();
         actividad = radioActividad.getCheckedRadioButtonId();
@@ -114,10 +118,10 @@ public class PerfilActivity extends Activity {
 
         if (sexo == R.id.perfil_masculino) {
             tasaMetabolicaBasal = (10 * Double.parseDouble(peso)) +
-                    (6.25 * Double.parseDouble(estatura)) - (5 * edad) + 5;
+                    (6.25 * Double.parseDouble(estatura)) - (5 * Integer.parseInt(edad)) + 5;
         } else {
             tasaMetabolicaBasal = (10 * Double.parseDouble(peso)) +
-                    (6.25 * Double.parseDouble(estatura)) - (5 * edad) - 161;
+                    (6.25 * Double.parseDouble(estatura)) - (5 * Integer.parseInt(edad)) - 161;
         }
 
         switch(actividad) {
@@ -151,6 +155,17 @@ public class PerfilActivity extends Activity {
         }
     }
 
+    public boolean validarInputs() {
+        if (estatura.equals(null) || estatura.equals("0") || estatura.equals("")
+                || peso.equals(null) || peso.equals("0") || peso.equals("")
+                || edad.equals(null) || edad.equals("0") || edad.equals("")
+                || sexo <= 0 || meta <= 0 || actividad <= 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public void desplegarCaloriasMeta(Context ctxt) {
         new AlertDialog.Builder(ctxt)
             .setTitle(R.string.titulo_calorias_meta)
@@ -165,6 +180,19 @@ public class PerfilActivity extends Activity {
             .show();*/
     }
 
+    public void desplegarAdvertencia(Context ctxt) {
+        new AlertDialog.Builder(ctxt)
+                .setTitle(R.string.titulo_error_input_perfil)
+                .setMessage(R.string.mensaje_error_input_perfil)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // No hacer nada.
+                    }
+                })
+                .setIcon(R.drawable.ic_warning_gray)
+                .show();
+    }
+
     @Override
     protected void onStop(){
         super.onStop();
@@ -176,7 +204,7 @@ public class PerfilActivity extends Activity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("estatura", estatura);
         editor.putString("peso", peso);
-        editor.putInt("edad", edad);
+        editor.putString("edad", edad);
         editor.putInt("sexo", sexo);
         editor.putInt("meta", meta);
         editor.putInt("actividad", actividad);

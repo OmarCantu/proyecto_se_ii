@@ -43,4 +43,8 @@
     <string name="calcular">Calcular</string>
     <string name="titulo_calorias_meta">Calorías meta</string>
     <string name="mensaje_calorias_meta">Tu meta diaria: </string>
+    <string name="titulo_error_input_perfil">Error en datos</string>
+    <string name="mensaje_error_input_perfil">
+        Uno o más campos están vacíos o tienen datos inválidos.
+    </string>
 </resources>
