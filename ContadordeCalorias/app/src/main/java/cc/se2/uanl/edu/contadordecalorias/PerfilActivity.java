@@ -1,6 +1,9 @@
 package cc.se2.uanl.edu.contadordecalorias;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 //import android.support.v7.app.ActionBarActivity;
 import android.content.SharedPreferences;
@@ -51,8 +54,9 @@ public class PerfilActivity extends Activity {
             public void onClick(View view) {
                 actualizarVariables();
                 calcularCaloriasMeta();
-                Toast.makeText(PerfilActivity.this, "Tu meta: " + caloriasMeta + " cal/día",
-                        Toast.LENGTH_LONG).show();
+                desplegarCaloriasMeta(PerfilActivity.this);
+                /*Toast.makeText(PerfilActivity.this, "Tu meta: " + caloriasMeta + " cal/día",
+                        Toast.LENGTH_LONG).show();*/
             }
         });
     }
@@ -145,6 +149,20 @@ public class PerfilActivity extends Activity {
                 caloriasMeta = (int) Math.round(caloriasDiarias * 1.25);
                 break;
         }
+    }
+
+    public void desplegarCaloriasMeta(Context ctxt) {
+        new AlertDialog.Builder(ctxt)
+            .setTitle(R.string.titulo_calorias_meta)
+            .setMessage(getString(R.string.mensaje_calorias_meta) + " " + caloriasMeta + " cal.")
+            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // No hacer nada.
+                }
+            })
+            .show();
+            /*.setIcon(R.drawable.ic_accept) // android.R.drawable.ic_xxxxx
+            .show();*/
     }
 
     @Override

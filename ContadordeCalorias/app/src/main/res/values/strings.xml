@@ -41,4 +41,6 @@
     <string name="cena">Cena</string>
     <string name="aperitivos">Aperitivos</string>
     <string name="calcular">Calcular</string>
+    <string name="titulo_calorias_meta">Calorías meta</string>
+    <string name="mensaje_calorias_meta">Tu meta diaria: </string>
 </resources>
