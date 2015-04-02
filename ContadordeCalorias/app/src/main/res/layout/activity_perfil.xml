@@ -45,7 +45,8 @@
         android:layout_toRightOf="@+id/perfil_estatura"
         android:layout_below="@+id/datos_personales"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:imeOptions="actionDone" />
 
     <!--LEYENDA PESO-->
     <TextView
@@ -71,7 +72,8 @@
         android:layout_below="@+id/perfil_cm"
         android:layout_toRightOf="@+id/perfil_estatura"
         android:layout_alignRight="@+id/perfil_cm"
-        android:layout_alignEnd="@+id/perfil_cm" />
+        android:layout_alignEnd="@+id/perfil_cm"
+        android:imeOptions="actionDone" />
 
     <!--LEYENDA EDAD-->
     <TextView
@@ -98,7 +100,8 @@
         android:layout_alignRight="@+id/perfil_kg"
         android:layout_alignEnd="@+id/perfil_kg"
         android:layout_toRightOf="@+id/perfil_estatura"
-        android:layout_toEndOf="@+id/perfil_estatura" />
+        android:layout_toEndOf="@+id/perfil_estatura"
+        android:imeOptions="actionDone" />
 
     <!--LEYENDA SEXO-->
     <TextView
