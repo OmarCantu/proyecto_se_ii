@@ -80,7 +80,7 @@ public class PerfilActivity extends Activity {
         sexo = preferences.getInt("sexo", 0);
         meta = preferences.getInt("meta", 0);
         actividad = preferences.getInt("actividad", 0);
-       // caloriasMeta = preferences.getInt("caloriasMeta", 0);
+        caloriasMeta = preferences.getInt("caloriasMeta", 0);
 
         // Instanciar inputs
         inputEstatura = (EditText) findViewById(R.id.perfil_cm);

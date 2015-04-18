@@ -38,6 +38,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     private int caloriasDiarias = 0;
     private int caloriasMeta = 0;
     private SharedPreferences preferencesPerfil, preferencesContador;
+    public static final String PREFS_NAME2 = "MyPrefsFile2";
 
     public MyExpandableListAdapter(Activity act, SparseArray<Group> groups)
     {
@@ -47,16 +48,13 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         db = new MyDatabase(activity);
         food = db.getAlimentos();
 
-        if(ContadorActivity.active==true)
-        {
-            preferencesPerfil = activity.getSharedPreferences(PerfilActivity.PREFS_NAME, 0);
-            caloriasMeta = preferencesPerfil.getInt("caloriasMeta", 0);
-        }
-        else
-        {
-            preferencesContador = activity.getSharedPreferences(ContadorActivity.PREFS_NAME2, 0);
-            caloriasMeta = preferencesContador.getInt("caloriasMeta", 0);
-        }
+        preferencesPerfil = activity.getSharedPreferences(PerfilActivity.PREFS_NAME, 0);
+        caloriasMeta = preferencesPerfil.getInt("caloriasMeta", 0);
+
+        preferencesContador = activity.getSharedPreferences(PREFS_NAME2, 0);
+        SharedPreferences.Editor editor = preferencesContador.edit();
+        editor.putInt("caloriasMeta", caloriasMeta);
+        editor.commit();
     }
 
     @Override
@@ -72,6 +70,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
+
 
 
         if (convertView == null)
@@ -171,34 +170,35 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     public void addListenerOnButton()
     {
+            if(caloriasMeta!=0) {
+                buscar.setOnClickListener(new View.OnClickListener() {
 
-            buscar.setOnClickListener(new View.OnClickListener()
+                    @Override
+                    public void onClick(View arg) {
+                        if (stAlimento != "") {
+
+
+                            caloriasDiarias = calcularCalorias(stAlimento, cantidad);
+                            tvCaloriasDiarias.setText("" + caloriasDiarias + " cal.");
+                            caloriasMeta -= caloriasDiarias;
+                            tvCaloriasMeta.setText("" + caloriasMeta + " cal.");
+
+
+                            if (caloriasMeta < 0) {
+                                // tvCaloriasMeta.setTextColor(activity.getResources().getColor(R.color.rojo));
+                                desplegarExcesoCalorico(activity);
+                                caloriasMeta = getCaloriasMetaBase();
+                                setFooter();
+                            }
+
+                        }
+                    }
+                });
+            }
+            else
             {
-
-                @Override
-                public void onClick(View arg)
-                {
-                     if(stAlimento != "")
-                     {
-
-
-                           caloriasDiarias = calcularCalorias(stAlimento, cantidad);
-                           tvCaloriasDiarias.setText("" + caloriasDiarias+" cal.");
-                           caloriasMeta -= caloriasDiarias;
-                           tvCaloriasMeta.setText("" + caloriasMeta+" cal.");
-
-
-                         if(caloriasMeta<0)
-                         {
-                            // tvCaloriasMeta.setTextColor(activity.getResources().getColor(R.color.rojo));
-                             desplegarExcesoCalorico(activity);
-                             caloriasMeta = getCaloriasMetaBase();
-                             setFooter();
-                         }
-
-                     }
-                }
-            });
+                desplegarAdvertenciaCaloriasMeta(activity);
+            }
     }
 
     public void addListenerOnEditText()
@@ -325,9 +325,23 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 .show();
     }
 
+    public void desplegarAdvertenciaCaloriasMeta(Context ctxt)
+    {
+        new AlertDialog.Builder(ctxt)
+                .setTitle(R.string.titulo_error_input_contador)
+                .setMessage("Debe primero establecer sus calorías Meta antes de empezar con su plan calórico")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // No hacer nada.
+                    }
+                })
+                .setIcon(R.drawable.ic_warning_gray)
+                .show();
+    }
+
     public int getCaloriasMetaBase()
     {
-        preferencesPerfil = activity.getSharedPreferences(PerfilActivity.PREFS_NAME, 0);
+        preferencesContador = activity.getSharedPreferences(PREFS_NAME2, 0);
 
         return preferencesPerfil.getInt("caloriasMeta", 0);
     }

@@ -23,8 +23,6 @@ public class ContadorActivity extends Activity {
     SparseArray<Group> groups = new SparseArray<Group>();
     RelativeLayout footerLayout;
     private SharedPreferences preferences;
-    public static final String PREFS_NAME2 = "MyPrefsFile2";
-    public static boolean active = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,7 +39,6 @@ public class ContadorActivity extends Activity {
         footerLayout = (RelativeLayout) view.findViewById(R.id.footer);
         listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         listView.addFooterView(footerLayout);
-
 
 
         TextView tv = (TextView) findViewById(R.id.diferencia);
@@ -107,21 +104,16 @@ public class ContadorActivity extends Activity {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        active = true;
-    }
-
-    @Override
-    protected void onStop(){
+    protected void onStop()
+    {
         super.onStop();
         persistirDatos();
-        active = false;
+
     }
 
     public void persistirDatos()
     {
-        preferences = getSharedPreferences(PREFS_NAME2, 0);
+        preferences = getSharedPreferences(PerfilActivity.PREFS_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("caloriasMeta", adapter.getCaloriasMeta());
         editor.commit();
