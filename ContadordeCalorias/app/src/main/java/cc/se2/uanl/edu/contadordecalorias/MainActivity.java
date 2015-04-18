@@ -13,10 +13,12 @@ import android.view.View;
 import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
+import android.os.Handler;
 
 // public class MainActivity extends ActionBarActivity {
 public class MainActivity extends Activity {
     public final static String EXTRA_MESSAGE = "edu.uanl.se2.cc.MESSAGE";
+    private static int SPLASH_TIME_OUT = 1000;
 
     /** Called when the user clicks the Send button */
    /* public void sendMessage(View view) {
@@ -31,6 +33,15 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent(MainActivity.this, ConsultaActivity.class);
+                startActivity(i);
+                finish();
+            }
+        },SPLASH_TIME_OUT);
     }
 
     @Override
