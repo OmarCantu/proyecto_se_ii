@@ -44,6 +44,10 @@
     <string name="titulo_calorias_meta">Calorías meta</string>
     <string name="mensaje_calorias_meta">Tu meta diaria: </string>
     <string name="titulo_error_input_perfil">Error en datos</string>
+    <string name="titulo_error_input_contador">Error! </string>
+    <string name="mensaje_error_input_contador">
+        El alimento seleccionado no se encontró.
+    </string>
     <string name="mensaje_error_input_perfil">
         Uno o más campos están vacíos o tienen datos inválidos.
     </string>

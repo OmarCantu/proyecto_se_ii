@@ -3,17 +3,15 @@ package cc.se2.uanl.edu.contadordecalorias;
 import android.app.Activity;
 import android.content.Intent;
 //import android.support.v7.app.ActionBarActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,8 +19,12 @@ import android.widget.Toast;
 
 public class ContadorActivity extends Activity {
 
+    MyExpandableListAdapter adapter;
     SparseArray<Group> groups = new SparseArray<Group>();
     RelativeLayout footerLayout;
+    private SharedPreferences preferences;
+    public static final String PREFS_NAME2 = "MyPrefsFile2";
+    public static boolean active = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,15 +35,28 @@ public class ContadorActivity extends Activity {
         createData();
 
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
-        MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,groups);
+        adapter = new MyExpandableListAdapter(this,groups);
 
         View view = getLayoutInflater().inflate(R.layout.footer, listView, false);
         footerLayout = (RelativeLayout) view.findViewById(R.id.footer);
         listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         listView.addFooterView(footerLayout);
+
+
+
+        TextView tv = (TextView) findViewById(R.id.diferencia);
+        adapter.setCaloriasMeta(tv);
+
+        TextView tv2 = (TextView) findViewById(R.id.calorias_footer);
+        adapter.setCaloriasDiarias(tv2);
+
+        adapter.setFooter();
+
         listView.setAdapter(adapter);
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -91,8 +106,29 @@ public class ContadorActivity extends Activity {
 //        System.exit(0);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        active = true;
+    }
 
-    public void createData() {
+    @Override
+    protected void onStop(){
+        super.onStop();
+        persistirDatos();
+        active = false;
+    }
+
+    public void persistirDatos()
+    {
+        preferences = getSharedPreferences(PREFS_NAME2, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("caloriasMeta", adapter.getCaloriasMeta());
+        editor.commit();
+    }
+
+    public void createData()
+    {
 
         Group desayuno = new Group(getString(R.string.desayuno));
         desayuno.children.add("");
@@ -111,6 +147,7 @@ public class ContadorActivity extends Activity {
         groups.append(3, aperitivos);
 
     }
+
 
 }
 

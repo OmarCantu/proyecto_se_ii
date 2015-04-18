@@ -6,4 +6,6 @@
     <color name="gris_oscuro">#436060</color>
     <color name="gris_suave">#EAEAEA</color>
     <color name="celeste_opaco">#9BC7E5</color>
+    <color name="rojo">#D60000</color>
+    <color name="verde">#ff49ff7a</color>
 </resources>

@@ -96,8 +96,8 @@ public class ConsultaActivity extends Activity {
 
         imageButton = (ImageButton) findViewById(R.id.imageButton);
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
-
+        imageButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View arg) {
 
@@ -123,11 +123,12 @@ public class ConsultaActivity extends Activity {
         int size = food.getCount();
         String[] alimentos = new String[size];
 
-            for(int i=0;i<size;i++) {
-                alimentos[i]=food.getString(1);
+        if (food != null && food.moveToFirst()) {
+            for (int i = 0; i < size; i++) {
+                alimentos[i] = food.getString(1);
                 food.moveToNext();
             }
-
+        }
         AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.cuanto);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, alimentos);
         textView.setAdapter(adapter);

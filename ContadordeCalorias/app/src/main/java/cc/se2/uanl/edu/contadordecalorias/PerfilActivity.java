@@ -39,6 +39,7 @@ public class PerfilActivity extends Activity {
     private Button botonGuardar;
     private SharedPreferences preferences;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,10 @@ public class PerfilActivity extends Activity {
                     desplegarCaloriasMeta(PerfilActivity.this);
                     /*Toast.makeText(PerfilActivity.this, "Tu meta: " + caloriasMeta + " cal/día",
                         Toast.LENGTH_LONG).show();*/
+
+
+
+
                 } else {
                     desplegarAdvertencia(PerfilActivity.this);
                 }
@@ -75,7 +80,7 @@ public class PerfilActivity extends Activity {
         sexo = preferences.getInt("sexo", 0);
         meta = preferences.getInt("meta", 0);
         actividad = preferences.getInt("actividad", 0);
-        caloriasMeta = preferences.getInt("caloriasMeta", 0);
+       // caloriasMeta = preferences.getInt("caloriasMeta", 0);
 
         // Instanciar inputs
         inputEstatura = (EditText) findViewById(R.id.perfil_cm);
@@ -84,6 +89,8 @@ public class PerfilActivity extends Activity {
         radioSexo = (RadioGroup) findViewById(R.id.radio_sexo);
         radioMeta = (RadioGroup) findViewById(R.id.radio_meta);
         radioActividad = (RadioGroup) findViewById(R.id.radio_actividad);
+        //saveCalorias = (TextView)findViewById(R.id.calorias_meta);
+
 
         // Mostrar datos
         inputEstatura.setText(estatura);
@@ -92,6 +99,7 @@ public class PerfilActivity extends Activity {
         radioSexo.check(sexo);
         radioMeta.check(meta);
         radioActividad.check(actividad);
+      //  saveCalorias.setText(caloriasMeta+"");
     }
 
     public void actualizarVariables() {
@@ -102,14 +110,16 @@ public class PerfilActivity extends Activity {
         radioSexo = (RadioGroup) findViewById(R.id.radio_sexo);
         radioMeta = (RadioGroup) findViewById(R.id.radio_meta);
         radioActividad = (RadioGroup) findViewById(R.id.radio_actividad);
+      //  saveCalorias = (TextView)findViewById(R.id.calorias_meta);
 
-        // Asignar datos datos de inputs a variables
+        // Asignar datos de inputs a variables
         estatura = inputEstatura.getText().toString();
         peso = inputPeso.getText().toString();
         edad = inputEdad.getText().toString();
         sexo = radioSexo.getCheckedRadioButtonId();
         meta = radioMeta.getCheckedRadioButtonId();
         actividad = radioActividad.getCheckedRadioButtonId();
+      //  caloriasMeta = Integer.parseInt(saveCalorias.getText().toString());
     }
 
     public void calcularCaloriasMeta() {
@@ -176,6 +186,11 @@ public class PerfilActivity extends Activity {
                 }
             })
             .show();
+        preferences = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("caloriasMeta", Integer.parseInt("" + Math.round(caloriasMeta)));
+        editor.commit();
+
             /*.setIcon(R.drawable.ic_accept) // android.R.drawable.ic_xxxxx
             .show();*/
     }
@@ -210,6 +225,13 @@ public class PerfilActivity extends Activity {
         editor.putInt("actividad", actividad);
         editor.putInt("caloriasMeta", Integer.parseInt("" + Math.round(caloriasMeta)));
         editor.commit();
+    }
+
+
+    public int getCaloriasMeta()
+    {
+
+        return caloriasMeta;
     }
 
     @Override

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/azul_real"
         android:text="1500 cal."
-        android:id="@+id/calorias"
+        android:id="@+id/calorias_footer"
         android:textSize="30dp"
         android:layout_below="@+id/calcular"
         android:layout_toLeftOf="@+id/calcular"

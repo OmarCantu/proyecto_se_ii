@@ -1,20 +1,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="match_parent"
     android:clickable="true"
     android:orientation="vertical"
     android:paddingLeft="40dp"
+    android:id="@+id/listRow"
     tools:context=".MainActivity" >
 
-    <EditText
-        android:layout_width="164dp"
+
+    <AutoCompleteTextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_search"
         android:id="@+id/alimento"
-        android:layout_toLeftOf="@+id/boton_añadir"
+        android:drawableRight="@drawable/ic_search"
+        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/imageButton2"
+        android:layout_toLeftOf="@+id/imageButton2" />
 
     <Button
         android:layout_width="wrap_content"
@@ -22,9 +26,10 @@
         android:text="+"
         android:id="@+id/boton_añadir"
         android:layout_gravity="right"
-        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/gramos"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/numberPicker1" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,5 +52,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="57dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_search"
+        android:id="@+id/buscar_alimento"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

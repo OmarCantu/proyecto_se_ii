@@ -121,9 +121,7 @@ public class MainActivity extends Activity {
 
         /*AssetDatabaseOpenHelper adb = new AssetDatabaseOpenHelper(this.getApplicationContext());
         SQLiteDatabase db  =adb.openDatabase();
-
         String      query  = "SELECT Alimento FROM Alimentos where Alimento = 'pizza' " ;
-
         Cursor cursor  = db.rawQuery(query, null);
         Toast.makeText(this, cursor.getString(0), Toast.LENGTH_SHORT).show();*/
     }

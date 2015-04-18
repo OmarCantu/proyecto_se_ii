@@ -49,22 +49,23 @@ public class MyDatabase extends SQLiteAssetHelper {
     {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        int cal;
+        int cal = -1;
 
-        String [] sqlSelect = {"0 _id", "Alimento", "Calorias"};
-        String sqlTables = "Alimentos";
-        alimento = alimento.substring(0, 1).toUpperCase() + alimento.substring(1);
-        qb.setTables(sqlTables);
-        qb.appendWhere("Alimento="+"'"+alimento+"'");
+        if(alimento!=""&&alimento!=null&&alimento.length()>1) {
+            String[] sqlSelect = {"0 _id", "Alimento", "Calorias"};
+            String sqlTables = "Alimentos";
+            alimento = alimento.substring(0, 1).toUpperCase() + alimento.substring(1);
+            qb.setTables(sqlTables);
+            qb.appendWhere("Alimento=" + "'" + alimento + "'");
 
-        Cursor c = qb.query(db, sqlSelect, null, null, null, null, null);
-        c.moveToFirst();
+            Cursor c = qb.query(db, sqlSelect, null, null, null, null, null);
+            c.moveToFirst();
 
-        if(c.moveToFirst())
-            cal = c.getInt(2);
-        else
-            cal=-1;
-
+            if (c.moveToFirst() && c != null)
+                cal = c.getInt(2);
+            else
+                cal = -1;
+        }
         return cal;
     }
 
