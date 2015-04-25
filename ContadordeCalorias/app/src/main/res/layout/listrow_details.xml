@@ -17,14 +17,14 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/imageButton2"
-        android:layout_toLeftOf="@+id/imageButton2" />
+        android:layout_toStartOf="@+id/agregar_calorias"
+        android:layout_toLeftOf="@+id/agregar_calorias" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+"
-        android:id="@+id/boton_añadir"
+        android:id="@+id/agregar_calorias"
         android:layout_gravity="right"
         android:layout_alignBottom="@+id/gramos"
         android:layout_alignParentRight="true"
