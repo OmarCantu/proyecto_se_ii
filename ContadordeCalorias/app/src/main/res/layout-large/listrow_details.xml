@@ -16,17 +16,7 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/buscar_alimento"
-        android:layout_toStartOf="@+id/buscar_alimento" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buscar_alimento"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_search" />
+        android:layout_toStartOf="@+id/agregar_calorias" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +38,7 @@
         android:topRightRadius="100dp"
         android:bottomLeftRadius="100dp"
         android:bottomRightRadius="100dp"
-        android:layout_alignTop="@+id/gramos"
+        android:layout_above="@+id/picker_contador"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -56,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/picker_contador"
-        android:layout_below="@+id/buscar_alimento"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/alimento" />
 </RelativeLayout>

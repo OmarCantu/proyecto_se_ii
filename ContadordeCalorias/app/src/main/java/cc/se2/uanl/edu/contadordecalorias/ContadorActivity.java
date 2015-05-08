@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class ContadorActivity extends Activity {
     SparseArray<Group> groups = new SparseArray<Group>();
     RelativeLayout footerLayout;
     private SharedPreferences preferences;
+    public static boolean active = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,6 +42,9 @@ public class ContadorActivity extends Activity {
         listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         listView.addFooterView(footerLayout);
 
+
+        //Button button = (Button) findViewById(R.id.calcular);
+        //adapter.setCalcular(button);
 
         TextView tv = (TextView) findViewById(R.id.diferencia);
         adapter.setCaloriasMeta(tv);
@@ -103,11 +108,19 @@ public class ContadorActivity extends Activity {
 //        System.exit(0);
     }
 
+    public void onStart()
+    {
+        super.onStart();
+        active = true;
+    }
+
+
     @Override
     protected void onStop()
     {
         super.onStop();
         persistirDatos();
+        active = false;
 
     }
 
