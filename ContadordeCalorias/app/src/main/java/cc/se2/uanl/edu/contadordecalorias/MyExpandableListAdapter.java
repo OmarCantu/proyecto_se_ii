@@ -73,7 +73,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
 
-
         if (convertView == null)
         {
             convertView = inflater.inflate(R.layout.listrow_details, null);
@@ -90,6 +89,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
             addCalorias = (Button) convertView.findViewById(R.id.agregar_calorias);
             addListenerOnButton();
+
         }
 
         return convertView;
@@ -132,6 +132,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null)
         {
             convertView = inflater.inflate(R.layout.listrow_group, null);
+
         }
         Group group = (Group) getGroup(groupPosition);
         ((TextView) convertView).setText(group.string);
