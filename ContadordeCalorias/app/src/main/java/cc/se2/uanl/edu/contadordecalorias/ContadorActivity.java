@@ -25,6 +25,7 @@ public class ContadorActivity extends Activity {
     RelativeLayout footerLayout;
     private SharedPreferences preferences;
     public static boolean active = false;
+    private Button botonAgregarConsumo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,8 +44,15 @@ public class ContadorActivity extends Activity {
         listView.addFooterView(footerLayout);
 
 
-        //Button button = (Button) findViewById(R.id.calcular);
-        //adapter.setCalcular(button);
+        botonAgregarConsumo = (Button)findViewById(R.id.agregar_calorias);
+
+        /*botonAgregarConsumo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ContadorActivity.this, R.string.calorias_agregadas,
+                Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
         TextView tv = (TextView) findViewById(R.id.diferencia);
         adapter.setCaloriasMeta(tv);

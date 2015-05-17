@@ -51,4 +51,6 @@
     <string name="mensaje_error_input_perfil">
         Uno o más campos están vacíos o tienen datos inválidos.
     </string>
+    <string name="calorias_agregadas">Calorías agregadas</string>
+    <string name="caption_calorias">Calorías</string>
 </resources>

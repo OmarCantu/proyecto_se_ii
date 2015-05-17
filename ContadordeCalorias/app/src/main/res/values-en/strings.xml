@@ -46,4 +46,6 @@
     <string name="mensaje_error_input_perfil">
         One or more fields are empty or have invalid data.
     </string>
+    <string name="calorias_agregadas">Added calories</string>
+    <string name="caption_calorias">Calories</string>
 </resources>
