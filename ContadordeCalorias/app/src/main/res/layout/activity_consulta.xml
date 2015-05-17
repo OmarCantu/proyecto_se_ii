@@ -69,10 +69,9 @@
         android:text="gr."
         android:textSize="20sp"
         android:id="@+id/gramos"
-        android:layout_marginTop="99dp"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_alignTop="@+id/textView2" />
+        android:layout_above="@+id/calorias"
+        android:layout_toLeftOf="@+id/imageButton"
+        android:layout_toStartOf="@+id/imageButton" />
 
     <ImageButton
         android:layout_width="wrap_content"
