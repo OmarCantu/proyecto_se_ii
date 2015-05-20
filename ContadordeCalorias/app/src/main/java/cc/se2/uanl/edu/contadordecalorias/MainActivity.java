@@ -2,6 +2,7 @@ package cc.se2.uanl.edu.contadordecalorias;
 
 import android.content.Intent;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,6 +20,7 @@ import android.os.Handler;
 public class MainActivity extends Activity {
     public final static String EXTRA_MESSAGE = "edu.uanl.se2.cc.MESSAGE";
     private static int SPLASH_TIME_OUT = 1000;
+    private SharedPreferences preferencesPerfil;
 
     /** Called when the user clicks the Send button */
    /* public void sendMessage(View view) {
@@ -92,7 +94,8 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    public void salir() {
+    public void salir()
+    {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

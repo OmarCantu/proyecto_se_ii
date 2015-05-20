@@ -23,8 +23,8 @@ public class ContadorActivity extends Activity {
     MyExpandableListAdapter adapter;
     SparseArray<Group> groups = new SparseArray<Group>();
     RelativeLayout footerLayout;
-    private SharedPreferences preferences;
-    public static boolean active = false;
+    private SharedPreferences preferencesPerfil;
+    private Button terminar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,9 +43,6 @@ public class ContadorActivity extends Activity {
         listView.addFooterView(footerLayout);
 
 
-        //Button button = (Button) findViewById(R.id.calcular);
-        //adapter.setCalcular(button);
-
         TextView tv = (TextView) findViewById(R.id.diferencia);
         adapter.setCaloriasMeta(tv);
 
@@ -53,11 +50,10 @@ public class ContadorActivity extends Activity {
         adapter.setCaloriasDiarias(tv2);
 
         adapter.setFooter();
-
+        addListenerBotonTerminar();
         listView.setAdapter(adapter);
 
     }
-
 
 
     @Override
@@ -81,6 +77,7 @@ public class ContadorActivity extends Activity {
             case R.id.action_salir_contador:
                 salir();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -98,7 +95,8 @@ public class ContadorActivity extends Activity {
         startActivity(intent);
     }
 
-    public void salir() {
+    public void salir()
+    {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -108,28 +106,38 @@ public class ContadorActivity extends Activity {
 //        System.exit(0);
     }
 
-    public void onStart()
-    {
-        super.onStart();
-        active = true;
-    }
-
-
     @Override
     protected void onStop()
     {
         super.onStop();
         persistirDatos();
-        active = false;
-
     }
 
     public void persistirDatos()
     {
-        preferences = getSharedPreferences(PerfilActivity.PREFS_NAME, 0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("caloriasMeta", adapter.getCaloriasMeta());
+        preferencesPerfil = getSharedPreferences(PerfilActivity.PREFS_NAME, 0);
+        SharedPreferences.Editor editor = preferencesPerfil.edit();
+        editor.putInt("caloriasContador", adapter.getCaloriasMeta());
         editor.commit();
+    }
+
+    public void addListenerBotonTerminar()
+    {
+        terminar = (Button) findViewById(R.id.calcular);
+        terminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                preferencesPerfil = getSharedPreferences(PerfilActivity.PREFS_NAME, 0);
+                SharedPreferences.Editor editor = preferencesPerfil.edit();
+                editor.putInt("caloriasContador", adapter.getCaloriasMetaBase());
+                editor.commit();
+
+                adapter.setCaloriasContadas(0);
+                adapter.setCaloriasMeta(adapter.getCaloriasMetaBase());
+                adapter.setFooter();
+            }
+        });
     }
 
     public void createData()
@@ -152,18 +160,5 @@ public class ContadorActivity extends Activity {
         groups.append(3, aperitivos);
 
     }
-
-
 }
 
-  /* public void createData1() {
-        for (int j = 0; j < 5; j++) {
-            Group group = new Group("Test " + j);
-            for (int i = 0; i < 5; i++) {
-                group.children.add("Sub Item" + i);
-            }
-            groups.append(j, group);
-        }
-    }
-
-   */

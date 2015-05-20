@@ -39,11 +39,20 @@
     <string name="comida">Lunch</string>
     <string name="cena">Dinner</string>
     <string name="aperitivos">Snacks</string>
-    <string name="calcular">Calculate</string>
+    <string name="calcular">Done!!</string>
     <string name="titulo_calorias_meta">Calorie target</string>
     <string name="mensaje_calorias_meta">Your daily target: </string>
     <string name="titulo_error_input_perfil">Input error</string>
     <string name="mensaje_error_input_perfil">
-        One or more fields are empty or have invalid data.
+        One or more fields are empty or have invalid data :(
     </string>
+    <string name="mensaje_error_input_contador">
+        The food selected was not found :(
+    </string>
+    <string name="calorias_agregadas">Added calories</string>
+    <string name="caption_calorias">Calories</string>
+    <string name="diferencia">Difference</string>
+    <string name="contadas">Counted</string>
+    <string name="not_found">Not Found :(</string>
+    <string name="consumo_agregado">Intake added</string>
 </resources>

@@ -2,7 +2,6 @@ package cc.se2.uanl.edu.contadordecalorias;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -13,33 +12,37 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     private final SparseArray<Group>groups;
-    public LayoutInflater inflater;
-    public Activity activity;
+    private ArrayAdapter<String> adapter;
+    public  LayoutInflater inflater;
+    public  Activity activity;
     private String [] pv;
     private Cursor food;
     private MyDatabase db;
-    private  AutoCompleteTextView alimento;
+    private AutoCompleteTextView alimento;
     private Button addCalorias;
     private NumberPicker np;
-    private TextView tvCaloriasDiarias, tvCaloriasMeta;
+    private TextView tvCaloriasContadas, tvCaloriasMeta;
     private String stAlimento;
     private int cantidad;
-    private int caloriasDiarias = 0;
+    private int caloriasAlimento = 0;
     private int caloriasMeta = 0;
-    private SharedPreferences preferencesPerfil, preferencesContador;
-    public static final String PREFS_NAME2 = "MyPrefsFile2";
-    private Button calcular;
+    private int caloriasContadas = 0;
+    private int meta;
+    private SharedPreferences preferencesPerfil;
+
 
     public MyExpandableListAdapter(Activity act, SparseArray<Group> groups)
     {
@@ -48,14 +51,12 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         inflater = act.getLayoutInflater();
         db = new MyDatabase(activity);
         food = db.getAlimentos();
-
         preferencesPerfil = activity.getSharedPreferences(PerfilActivity.PREFS_NAME, 0);
-        caloriasMeta = preferencesPerfil.getInt("caloriasMeta", 0);
 
-        preferencesContador = activity.getSharedPreferences(PREFS_NAME2, 0);
-        SharedPreferences.Editor editor = preferencesContador.edit();
-        editor.putInt("caloriasMeta", caloriasMeta);
-        editor.commit();
+        meta = preferencesPerfil.getInt("meta", 0);
+        caloriasMeta = getCaloriasContador();
+        caloriasContadas = getCaloriasMetaBase() - caloriasMeta;
+
     }
 
     @Override
@@ -85,7 +86,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             alimento = (AutoCompleteTextView) convertView.findViewById(R.id.alimento);
             stAlimento = "";
             addListenerOnEditText();
-            crearLista(alimento);
+            crearLista();
 
             addCalorias = (Button) convertView.findViewById(R.id.agregar_calorias);
             addListenerOnButton();
@@ -160,9 +161,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         pv = new String[maxValue/minValue];
 
         for (int i = minValue; i <= maxValue; i += step)
-        {
-            pv[(i/step)-1] = String.valueOf(i);
-        }
+        pv[(i/step)-1] = String.valueOf(i);
 
         np.setMinValue(0);
         np.setMaxValue(pv.length-1);
@@ -170,40 +169,26 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
 
-    public void addListenerOnButtonCalcular()
-    {
-      calcular.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-
-          }
-      });
-    }
-
     public void addListenerOnButton()
     {
-            if(caloriasMeta!=0) {
-                addCalorias.setOnClickListener(new View.OnClickListener() {
-
+            if(caloriasMeta!=0)
+            {
+                addCalorias.setOnClickListener(new View.OnClickListener()
+                {
                     @Override
-                    public void onClick(View arg) {
-                        if (stAlimento != "") {
-
-
-                            caloriasDiarias = calcularCalorias(stAlimento, cantidad);
-                            tvCaloriasDiarias.setText("" + caloriasDiarias + " cal.");
-                            caloriasMeta -= caloriasDiarias;
-                            tvCaloriasMeta.setText("" + caloriasMeta + " cal.");
-
-
-                            if (caloriasMeta < 0) {
-                                // tvCaloriasMeta.setTextColor(activity.getResources().getColor(R.color.rojo));
-                                desplegarExcesoCalorico(activity);
-                                caloriasMeta = getCaloriasMetaBase();
-                                setFooter();
-                            }
-
+                    public void onClick(View arg)
+                    {
+                        if (stAlimento != "")
+                        {
+                            caloriasAlimento = calcularCalorias(stAlimento, cantidad);
+                            caloriasContadas += caloriasAlimento;
+                            caloriasMeta -= caloriasAlimento;
+                            setSignum();
+                            setColor();
+                            tvCaloriasContadas.setText(caloriasContadas+ " cal.");
+                            Toast.makeText(activity, activity.getString(R.string.consumo_agregado),Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 });
             }
@@ -230,6 +215,18 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
             }
         });
 
+
+        alimento.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+            {
+                InputMethodManager in = (InputMethodManager) activity.getSystemService(activity.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+
+        });
+
     }
 
     public void addListenerOnNumberPicker()
@@ -246,7 +243,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     }
 
-    public void crearLista(AutoCompleteTextView textView)
+    public void crearLista()
     {
         int size = food.getCount();
         String[] alimentos = new String[size];
@@ -259,14 +256,14 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 food.moveToNext();
             }
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, android.R.layout.simple_dropdown_item_1line, alimentos);
-        textView.setAdapter(adapter);
+        adapter = new ArrayAdapter<String>(activity, android.R.layout.simple_dropdown_item_1line, alimentos);
+        alimento.setAdapter(adapter);
     }
 
 
     public int calcularCalorias(String buscar, int cantidad)
     {
-        int totalCalorias=0;
+        int totalCalorias = 0;
         int cal = db.getCalorias(buscar);
 
         if(cal==-1)
@@ -280,15 +277,9 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
 
-    public void setCalcular(Button calcular)
-    {
-        this.calcular = calcular;
-
-    }
-
     public void setCaloriasDiarias(TextView tvCaloriasDiarias)
     {
-        this.tvCaloriasDiarias = tvCaloriasDiarias;
+        this.tvCaloriasContadas = tvCaloriasDiarias;
 
     }
 
@@ -300,37 +291,56 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     public void setFooter()
     {
-        //tvCaloriasMeta.setTextColor(activity.getResources().getColor(R.color.verde));
-        tvCaloriasDiarias.setText("0 cal.");
-        tvCaloriasMeta.setText(caloriasMeta+" cal.");
+        setColor();
+        setSignum();
+        tvCaloriasContadas.setText(caloriasContadas+ " cal.");
+    }
+
+    public void setColor()
+    {
+        switch (meta)
+        {
+            case R.id.perder_peso:
+            {
+                if(caloriasMeta>=0)
+                    tvCaloriasMeta.setTextColor(activity.getResources().getColor(R.color.verde));
+                else
+                    tvCaloriasMeta.setTextColor(activity.getResources().getColor(R.color.rojo));
+            }
+            break;
+
+            case R.id.mantener_peso:
+            {
+                if(caloriasMeta<getCaloriasMetaBase()*0.05&&caloriasMeta>getCaloriasMetaBase()*-0.05)
+                    tvCaloriasMeta.setTextColor(activity.getResources().getColor(R.color.verde));
+                else
+                    tvCaloriasMeta.setTextColor(activity.getResources().getColor(R.color.rojo));
+            }
+            break;
+
+            case R.id.ganar_peso:
+            {
+                if(caloriasMeta<0)
+                    tvCaloriasMeta.setTextColor(activity.getResources().getColor(R.color.verde));
+                else
+                    tvCaloriasMeta.setTextColor(activity.getResources().getColor(R.color.rojo));
+            }
+            break;
+        }
 
     }
 
-    public int getCaloriasMeta()
+    public void setSignum()
     {
-
-        preferencesPerfil = activity.getSharedPreferences(PerfilActivity.PREFS_NAME, 0);
-        return preferencesPerfil.getInt("caloriasMeta", 0);
+        if(caloriasMeta>0)
+            tvCaloriasMeta.setText("-"+caloriasMeta+" cal.");
+        else
+            tvCaloriasMeta.setText("+"+-1*caloriasMeta+" cal.");
 
     }
 
     public void desplegarAdvertencia(Context ctxt)
     {
-      /*  new AlertDialog.Builder(ctxt)
-                .setTitle(R.string.titulo_error_input_contador)
-                .setMessage(R.string.mensaje_error_input_contador)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // No hacer nada.
-                    }
-                })
-                .setIcon(R.drawable.ic_warning_gray)
-                .show();
-
-
-        */
-
-
         AlertDialog alertDialog;
         alertDialog = new AlertDialog.Builder(activity).create();
         alertDialog.setCanceledOnTouchOutside(false);
@@ -341,27 +351,10 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         alertDialog.setIcon(R.drawable.ic_warning_gray);
         alertDialog.show();
 
-
     }
 
     public void desplegarExcesoCalorico(Context ctxt)
     {
-
-
-       /* new AlertDialog.Builder(ctxt)
-                .setTitle("Exceso Calórico")
-                .setMessage("Ha sobrepasado su meta diaria de: "+getCaloriasMetaBase()+" cal. \nExceso de: "+caloriasMeta*-1+ " cal.")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // No hacer nada.
-                    }
-                })
-                .setIcon(R.drawable.ic_warning_gray)
-                .show();
-
-*/
-
-
         AlertDialog alertDialog;
         alertDialog = new AlertDialog.Builder(activity).create();
         alertDialog.setCanceledOnTouchOutside(false);
@@ -376,19 +369,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     public void desplegarAdvertenciaCaloriasMeta(Context ctxt)
     {
-        /*new AlertDialog.Builder(ctxt)
-                .setTitle(R.string.titulo_error_input_contador)
-                .setMessage("Debe primero establecer sus calorías Meta antes de empezar con su plan calórico")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // No hacer nada.
-                    }
-                })
-                .setIcon(R.drawable.ic_warning_gray)
-                .show();
-
-
-        */
         AlertDialog alertDialog;
         alertDialog = new AlertDialog.Builder(activity).create();
         alertDialog.setCanceledOnTouchOutside(false);
@@ -399,16 +379,31 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         alertDialog.setIcon(R.drawable.ic_warning_gray);
         alertDialog.show();
 
+    }
 
+    public void setCaloriasContadas(int caloriasContadas)
+    {
+        this.caloriasContadas = caloriasContadas;
+    }
 
+    public void setCaloriasMeta(int caloriasMeta)
+    {
+        this.caloriasMeta = caloriasMeta;
     }
 
     public int getCaloriasMetaBase()
     {
-        preferencesContador = activity.getSharedPreferences(PREFS_NAME2, 0);
-
         return preferencesPerfil.getInt("caloriasMeta", 0);
     }
 
+    public int getCaloriasContador()
+    {
+        return preferencesPerfil.getInt("caloriasContador", 0);
+    }
+
+    public int getCaloriasMeta()
+    {
+        return caloriasMeta;
+    }
 
 }

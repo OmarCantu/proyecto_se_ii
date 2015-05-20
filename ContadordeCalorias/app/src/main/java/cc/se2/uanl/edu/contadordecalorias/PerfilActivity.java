@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,11 +32,12 @@ public class PerfilActivity extends Activity {
     private EditText inputEstatura;
     private EditText inputPeso;
     private EditText inputEdad;
+    private TextView tvCaloriasMeta;
     private RadioGroup radioSexo;
     private RadioGroup radioMeta;
     private RadioGroup radioActividad;
     private Button botonGuardar;
-    private SharedPreferences preferences;
+    private SharedPreferences preferencesPerfil;
 
 
     @Override
@@ -47,6 +47,9 @@ public class PerfilActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         botonGuardar = (Button)findViewById(R.id.perfil_guardar);
+        preferencesPerfil = getSharedPreferences(PREFS_NAME, 0);
+        tvCaloriasMeta = (TextView) findViewById(R.id.calorias_meta);
+        tvCaloriasMeta.setText(preferencesPerfil.getInt("caloriasMeta",0)+" cal.");
 
         desplegarDatosGuardados();
 
@@ -57,11 +60,11 @@ public class PerfilActivity extends Activity {
                 if (validarInputs()) {
                     calcularCaloriasMeta();
                     desplegarCaloriasMeta(PerfilActivity.this);
+                    persistirDatos();
+                    tvCaloriasMeta.setText(caloriasMeta+" cal.");
+
                     /*Toast.makeText(PerfilActivity.this, "Tu meta: " + caloriasMeta + " cal/día",
                         Toast.LENGTH_LONG).show();*/
-
-
-
 
                 } else {
                     desplegarAdvertencia(PerfilActivity.this);
@@ -71,16 +74,16 @@ public class PerfilActivity extends Activity {
     }
 
     public void desplegarDatosGuardados(){
-        preferences = getSharedPreferences(PREFS_NAME, 0);
+        preferencesPerfil = getSharedPreferences(PREFS_NAME, 0);
 
         // Obtener datos guardados
-        estatura = preferences.getString("estatura", "");
-        peso = preferences.getString("peso", "");
-        edad = preferences.getString("edad", "");
-        sexo = preferences.getInt("sexo", 0);
-        meta = preferences.getInt("meta", 0);
-        actividad = preferences.getInt("actividad", 0);
-        caloriasMeta = preferences.getInt("caloriasMeta", 0);
+        estatura = preferencesPerfil.getString("estatura", "");
+        peso = preferencesPerfil.getString("peso", "");
+        edad = preferencesPerfil.getString("edad", "");
+        sexo = preferencesPerfil.getInt("sexo", 0);
+        meta = preferencesPerfil.getInt("meta", 0);
+        actividad = preferencesPerfil.getInt("actividad", 0);
+        caloriasMeta = preferencesPerfil.getInt("caloriasMeta", 0);
 
         // Instanciar inputs
         inputEstatura = (EditText) findViewById(R.id.perfil_cm);
@@ -186,8 +189,8 @@ public class PerfilActivity extends Activity {
                 }
             })
             .show();
-        preferences = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = preferences.edit();
+        preferencesPerfil = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = preferencesPerfil.edit();
         editor.putInt("caloriasMeta", Integer.parseInt("" + Math.round(caloriasMeta)));
         editor.commit();
 
@@ -195,8 +198,9 @@ public class PerfilActivity extends Activity {
             .show();*/
     }
 
-    public void desplegarAdvertencia(Context ctxt) {
-        new AlertDialog.Builder(ctxt)
+    public void desplegarAdvertencia(Context ctxt)
+    {
+       /* new AlertDialog.Builder(ctxt)
                 .setTitle(R.string.titulo_error_input_perfil)
                 .setMessage(R.string.mensaje_error_input_perfil)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -206,6 +210,17 @@ public class PerfilActivity extends Activity {
                 })
                 .setIcon(R.drawable.ic_warning_gray)
                 .show();
+                */
+        AlertDialog alertDialog;
+        alertDialog = new AlertDialog.Builder(ctxt).create();
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setTitle(R.string.titulo_error_input_perfil);
+        alertDialog.setMessage(getString(R.string.mensaje_error_input_perfil));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
+        { public void onClick(DialogInterface dialog, int which) { } });
+        alertDialog.setIcon(R.drawable.ic_warning_gray);
+        alertDialog.show();
+
     }
 
     @Override
@@ -214,9 +229,10 @@ public class PerfilActivity extends Activity {
         persistirDatos();
     }
 
-    public void persistirDatos() {
-        preferences = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = preferences.edit();
+    public void persistirDatos()
+    {
+        preferencesPerfil = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = preferencesPerfil.edit();
         editor.putString("estatura", estatura);
         editor.putString("peso", peso);
         editor.putString("edad", edad);
@@ -224,7 +240,9 @@ public class PerfilActivity extends Activity {
         editor.putInt("meta", meta);
         editor.putInt("actividad", actividad);
         editor.putInt("caloriasMeta", Integer.parseInt("" + Math.round(caloriasMeta)));
+        editor.putInt("caloriasContador", Integer.parseInt("" + Math.round(caloriasMeta)));
         editor.commit();
+
     }
 
 
@@ -254,6 +272,7 @@ public class PerfilActivity extends Activity {
                 return true;
             case R.id.action_salir_perfil:
                 salir();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

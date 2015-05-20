@@ -40,15 +40,22 @@
     <string name="comida">Comida</string>
     <string name="cena">Cena</string>
     <string name="aperitivos">Aperitivos</string>
-    <string name="calcular">Calcular</string>
+    <string name="calcular">Terminar!</string>
     <string name="titulo_calorias_meta">Calorías meta</string>
     <string name="mensaje_calorias_meta">Tu meta diaria: </string>
     <string name="titulo_error_input_perfil">Error en datos</string>
     <string name="titulo_error_input_contador">Error! </string>
     <string name="mensaje_error_input_contador">
-        El alimento seleccionado no se encontró.
+        El alimento seleccionado no se encontró :(
     </string>
     <string name="mensaje_error_input_perfil">
-        Uno o más campos están vacíos o tienen datos inválidos.
+        Uno o más campos están vacíos o tienen datos inválidos :(
     </string>
+    <string name="calorias_agregadas">Calorías agregadas</string>
+    <string name="caption_calorias">Calorías</string>
+    <string name="diferencia">Diferencia</string>
+    <string name="contadas">Contadas</string>
+    <string name="not_found">No se encontró :(</string>
+    <string name="consumo_agregado">Consumo agregado</string>
+
 </resources>

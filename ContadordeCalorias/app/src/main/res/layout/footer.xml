@@ -11,7 +11,7 @@
         android:text="1500 cal."
         android:id="@+id/calorias_footer"
         android:textSize="30dp"
-        android:layout_below="@+id/calcular"
+        android:layout_below="@+id/calorias_diferencia"
         android:layout_toLeftOf="@+id/calcular"
         android:layout_toStartOf="@+id/calcular" />
 
@@ -30,9 +30,30 @@
         android:id="@+id/diferencia"
         android:textSize="30dp"
         android:textColor="#ff49ff7a"
-        android:layout_below="@+id/calcular"
+        android:layout_below="@+id/calorias_contadas"
         android:layout_toRightOf="@+id/calcular"
         android:layout_toEndOf="@+id/calcular" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contadas"
+        android:id="@+id/calorias_contadas"
+        android:textSize="30dp"
+        android:layout_below="@+id/calcular"
+        android:layout_alignRight="@+id/calorias_footer"
+        android:layout_alignEnd="@+id/calorias_footer" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/diferencia"
+        android:id="@+id/calorias_diferencia"
+        android:textSize="30dp"
+        android:layout_below="@+id/calcular"
+        android:layout_alignLeft="@+id/diferencia"
+        android:layout_alignStart="@+id/diferencia" />
 
 
 </RelativeLayout>

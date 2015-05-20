@@ -3,14 +3,18 @@ package cc.se2.uanl.edu.contadordecalorias;
 import android.app.Activity;
 import android.content.Intent;
 //import android.support.v7.app.ActionBarActivity;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -26,6 +30,8 @@ public class ConsultaActivity extends Activity {
     private Cursor food;
     private MyDatabase db;
     String [] pv;
+    AutoCompleteTextView textView;
+    private SharedPreferences preferencesPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,7 @@ public class ConsultaActivity extends Activity {
 
         crearLista();
         addListenerOnButton();
+        addListenerOnTextView();
 
     }
 
@@ -66,6 +73,7 @@ public class ConsultaActivity extends Activity {
                 return true;
             case R.id.action_salir_consulta:
                 salir();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -116,6 +124,22 @@ public class ConsultaActivity extends Activity {
 
     }
 
+    public void addListenerOnTextView()
+    {
+        AutoCompleteTextView text = (AutoCompleteTextView) findViewById(R.id.cuanto);
+
+        text.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                InputMethodManager in = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+            }
+
+        });
+
+    }
 
 
     public void crearLista()
@@ -129,9 +153,10 @@ public class ConsultaActivity extends Activity {
                 food.moveToNext();
             }
         }
-        AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.cuanto);
+        textView = (AutoCompleteTextView) findViewById(R.id.cuanto);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, alimentos);
         textView.setAdapter(adapter);
+
     }
 
 
@@ -141,9 +166,9 @@ public class ConsultaActivity extends Activity {
         int cal = db.getCalorias(buscar);
 
         if(cal==-1)
-        totalCalorias="Alimento no encontrado";
+        totalCalorias = getString(R.string.not_found);
         else
-        totalCalorias=""+(cantidad*cal)/100;
+        totalCalorias = ""+(cantidad*cal)/100;
 
         return totalCalorias;
     }
