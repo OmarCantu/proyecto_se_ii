@@ -46,6 +46,7 @@
     <string name="mensaje_error_input_perfil">
         One or more fields are empty or have invalid data :(
     </string>
+
     <string name="mensaje_error_input_contador">
         The food selected was not found :(
     </string>
@@ -55,4 +56,6 @@
     <string name="contadas">Counted</string>
     <string name="not_found">Not Found :(</string>
     <string name="consumo_agregado">Intake added</string>
+
+
 </resources>

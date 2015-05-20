@@ -67,7 +67,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="gr."
-        android:textSize="20dp"
         android:id="@+id/gramos"
         android:layout_marginTop="76dp"
         android:layout_below="@+id/textView2"

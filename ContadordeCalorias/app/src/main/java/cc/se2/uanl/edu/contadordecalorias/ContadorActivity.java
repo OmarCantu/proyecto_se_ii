@@ -23,8 +23,8 @@ public class ContadorActivity extends Activity {
     MyExpandableListAdapter adapter;
     SparseArray<Group> groups = new SparseArray<Group>();
     RelativeLayout footerLayout;
-    private SharedPreferences preferencesPerfil;
     private Button terminar;
+    private SharedPreferences preferencesPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,7 +41,6 @@ public class ContadorActivity extends Activity {
         footerLayout = (RelativeLayout) view.findViewById(R.id.footer);
         listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         listView.addFooterView(footerLayout);
-
 
         TextView tv = (TextView) findViewById(R.id.diferencia);
         adapter.setCaloriasMeta(tv);
