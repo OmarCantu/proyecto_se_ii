@@ -39,7 +39,7 @@
     <string name="comida">Lunch</string>
     <string name="cena">Dinner</string>
     <string name="aperitivos">Snacks</string>
-    <string name="calcular">Done!!</string>
+    <string name="calcular">Done</string>
     <string name="titulo_calorias_meta">Calorie target</string>
     <string name="mensaje_calorias_meta">Your daily target: </string>
     <string name="titulo_error_input_perfil">Input error</string>

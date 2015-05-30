@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="@string/contadas"
         android:id="@+id/calorias_contadas"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_below="@+id/calcular"
         android:layout_alignRight="@+id/calorias_footer"
         android:layout_alignEnd="@+id/calorias_footer" />
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:text="@string/diferencia"
         android:id="@+id/calorias_diferencia"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_below="@+id/calcular"
         android:layout_alignLeft="@+id/diferencia"
         android:layout_alignStart="@+id/diferencia" />

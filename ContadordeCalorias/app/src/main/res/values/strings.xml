@@ -40,7 +40,7 @@
     <string name="comida">Comida</string>
     <string name="cena">Cena</string>
     <string name="aperitivos">Aperitivos</string>
-    <string name="calcular">Terminar!</string>
+    <string name="calcular">Terminar</string>
     <string name="titulo_calorias_meta">Calorías meta</string>
     <string name="mensaje_calorias_meta">Tu meta diaria: </string>
     <string name="titulo_error_input_perfil">Error en datos</string>
