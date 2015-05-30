@@ -373,7 +373,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         alertDialog = new AlertDialog.Builder(activity).create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setTitle(R.string.titulo_error_input_contador);
-        alertDialog.setMessage("Debe primero establecer sus calorías Meta antes de empezar con su plan calórico");
+        alertDialog.setMessage(activity.getString(R.string.advertencia_calorias_meta));
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener()
         { public void onClick(DialogInterface dialog, int which) { } });
         alertDialog.setIcon(R.drawable.ic_warning_gray);

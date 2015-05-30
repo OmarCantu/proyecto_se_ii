@@ -16,7 +16,7 @@
     <string name="perfil_peso">Weight</string>
     <string name="perfil_kg">kg</string>
     <string name="perfil_edad">Age</string>
-    <string name="perfil_years">years</string>
+    <string name="perfil_años">years</string>
     <string name="perfil_sexo">Sex</string>
     <string name="perfil_masculino">Man</string>
     <string name="perfil_femenino">Woman</string>
@@ -56,6 +56,7 @@
     <string name="contadas">Counted</string>
     <string name="not_found">Not Found :(</string>
     <string name="consumo_agregado">Intake added</string>
+    <string name="advertencia_calorias_meta">You must first establish your calorie goal before you start your calorie plan</string>
 
 
 </resources>

@@ -95,7 +95,7 @@
         android:inputType="number"
         android:ems="12"
         android:textSize="21sp"
-        android:hint="años"
+        android:hint="@string/perfil_edad"
         android:gravity="right"
         android:id="@+id/perfil_años"
         android:layout_below="@+id/perfil_kg"
